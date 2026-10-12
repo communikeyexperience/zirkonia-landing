@@ -21,7 +21,7 @@
 <meta name="twitter:description" content="Il sapere di una vita, trasformato in intelligenza che lavora sempre al tuo fianco, ovunque tu sia.">
 <meta name="twitter:image" content="https://zirkonia.ai/og-image.png">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,300;1,9..144,400;1,9..144,500&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+  @import url('fonts.css');
 
   :root{
     --bg: #070a12;
@@ -533,6 +533,31 @@
     font-size: 12px; letter-spacing:0.08em; text-transform:uppercase;
     color: var(--ink-faint);
   }
+  footer{ justify-content:center; }
+  .footer-brand{ display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:10px 16px; color:inherit; text-decoration:none; }
+  .footer-brand img{ display:block; height:34px; width:auto; opacity:.85; transition:opacity .25s ease; }
+  .footer-brand:hover img{ opacity:1; }
+  footer{ flex-direction:column; gap:18px; }
+  .footer-legal{ font-size:11px; letter-spacing:0.08em; }
+  .lgl-link{ background:none; border:0; padding:2px 0; font:inherit; letter-spacing:inherit; text-transform:inherit; color:inherit; cursor:pointer; text-decoration:underline; text-decoration-color:rgba(199,208,224,.3); text-underline-offset:3px; }
+  .lgl-link:hover{ color:var(--silver); text-decoration-color:currentColor; }
+  /* Privacy e Cookie: finestre aperte dai link del footer (bozza, da verificare con un professionista) */
+  .lgl-overlay{ position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; padding:16px; background:rgba(3,5,10,.75); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
+  .lgl-overlay[hidden]{ display:none; }
+  .lgl-dialog{ width:min(100%,720px); max-height:min(86vh,860px); display:flex; flex-direction:column; background:#0d1220; border:1px solid rgba(140,155,185,.22); border-radius:6px; box-shadow:0 30px 80px rgba(0,0,0,.55); overflow:hidden; }
+  .lgl-head{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 22px; border-bottom:1px solid var(--line); }
+  .lgl-head h2{ font-family:'Space Grotesk', sans-serif; font-size:clamp(20px,2.4vw,26px); font-weight:600; color:var(--ink); margin:0; max-width:none; }
+  .lgl-close{ flex:none; width:38px; height:38px; border-radius:50%; border:1px solid rgba(140,155,185,.25); background:rgba(255,255,255,.05); color:var(--ink); font-size:15px; cursor:pointer; }
+  .lgl-close:hover{ background:rgba(255,255,255,.12); }
+  .lgl-body{ overflow-y:auto; padding:20px 22px 26px; font-family:'Inter', sans-serif; color:var(--ink-dim); font-size:15px; line-height:1.65; overscroll-behavior:contain; text-transform:none; letter-spacing:normal; text-align:left; }
+  .lgl-body h3{ font-family:'Space Grotesk', sans-serif; font-size:17px; font-weight:600; color:var(--ink); margin:22px 0 8px; }
+  .lgl-body p+p{ margin-top:10px; }
+  .lgl-body ul{ margin:8px 0 0 20px; }
+  .lgl-body li{ margin:5px 0; }
+  .lgl-body strong{ color:var(--ink); font-weight:600; }
+  .lgl-id{ padding:14px 16px; border:1px solid var(--line); border-radius:4px; background:rgba(255,255,255,.03); font-size:13.5px; }
+  .lgl-date{ margin-top:22px !important; color:var(--ink-faint); font-size:13px; }
+  body.lgl-open{ overflow:hidden; }
 
   @media (max-width: 760px){
     .steps{ grid-template-columns: 1fr; gap: 34px; }
@@ -780,9 +805,108 @@
 </section>
 
 <footer>
-  <div>ZirkonIA<sup class="tm">™</sup></div>
-  <div>by Com &amp; Key Experience</div>
+  <a class="footer-brand" href="https://communikey-experience.it" target="_blank" rel="noopener">
+    <span>ZirkonIA<sup class="tm">™</sup> è un prodotto di</span>
+    <img src="com-key-logo.webp" width="485" height="150" alt="Com &amp; Key Experience">
+  </a>
+  <div class="footer-legal"><button type="button" class="lgl-link" data-lgl-open="lgl-privacy">Privacy</button> · <button type="button" class="lgl-link" data-lgl-open="lgl-cookie">Cookie</button></div>
 </footer>
+
+<!-- PRIVACY E COOKIE (bozza da far verificare a un professionista; testo allineato alla nota del brain «ZirkonIA - Informativa Privacy e Cookie della Landing (bozza)», ricavata da quella di Com & Key) -->
+<div class="lgl-overlay" id="lgl-privacy" hidden>
+<div class="lgl-dialog" role="dialog" aria-modal="true" aria-labelledby="lgl-privacy-t">
+  <div class="lgl-head"><h2 id="lgl-privacy-t">Informativa sulla privacy</h2><button type="button" class="lgl-close" aria-label="Chiudi" data-lgl-close>✕</button></div>
+  <div class="lgl-body">
+    <p class="lgl-id"><strong>ZirkonIA™</strong> è un prodotto di Com &amp; Key Experience, marchio commerciale di CristianoGMusa di Giuseppe Musa · P.IVA 03643440922 · Via Salvatore Cambosu, 42 - 09047 Selargius (CA)</p>
+    <h3>1. Titolare del trattamento</h3>
+    <p>Il titolare del trattamento è <strong>CristianoGMusa di Giuseppe Musa</strong> (P.IVA 03643440922), Via Salvatore Cambosu, 42 - 09047 Selargius (CA). Per qualsiasi domanda sui tuoi dati puoi scrivere a communikeyexperience@gmail.com o alla PEC cristianogmusa@postecert.it.</p>
+    <p>Questa informativa è resa ai sensi degli articoli 13 e 14 del Regolamento (UE) 2016/679 (GDPR) per chi visita il sito zirkonia.ai e per chi ci contatta.</p>
+    <h3>2. Quali dati trattiamo</h3>
+    <ul>
+    <li><strong>Dati tecnici di navigazione</strong>, come l'indirizzo IP e le informazioni sul browser, registrati dal fornitore di hosting quando visiti il sito.</li>
+    <li><strong>Dati di contatto e contenuto dei messaggi</strong>, se scegli di scriverci su WhatsApp o per email: nome, numero di telefono o indirizzo email e quello che ci racconti di te e del tuo lavoro.</li>
+    </ul>
+    <p>Il sito non ha moduli di raccolta dati. Le parole che puoi scrivere nel secondo cervello animato restano solo sul tuo schermo: non vengono inviate né salvate.</p>
+    <h3>3. Perché li trattiamo e su quale base</h3>
+    <ul>
+    <li><strong>Far funzionare il sito e proteggerlo</strong> (dati tecnici di navigazione): legittimo interesse alla sicurezza e al corretto funzionamento del sito (art. 6.1.f GDPR).</li>
+    <li><strong>Rispondere ai tuoi messaggi e valutare con te una possibile collaborazione</strong>: esecuzione di misure precontrattuali adottate su tua richiesta (art. 6.1.b).</li>
+    <li><strong>Gestire l'eventuale incarico e rispettare gli obblighi di legge</strong>, per esempio fiscali e contabili: esecuzione del contratto e obbligo di legge (art. 6.1.b e 6.1.c).</li>
+    <li><strong>Difendere i nostri diritti</strong> in caso di contestazioni: legittimo interesse (art. 6.1.f).</li>
+    </ul>
+    <p>Non usiamo i tuoi dati per profilazione o pubblicità e non li vendiamo.</p>
+    <h3>4. Chi può ricevere i tuoi dati</h3>
+    <p>Per far funzionare il sito e comunicare con te ci affidiamo a fornitori che trattano i dati per nostro conto o come titolari autonomi:</p>
+    <ul>
+    <li><strong>GitHub</strong> (GitHub Pages), per l'hosting del sito;</li>
+    <li><strong>WhatsApp</strong> (Meta), se scegli di scriverci su WhatsApp;</li>
+    <li><strong>Google</strong> (Gmail), per la posta elettronica.</li>
+    </ul>
+    <p>All'interno di Com &amp; Key Experience i dati sono letti solo dalle persone che gestiscono il rapporto con te. I dati possono essere comunicati ad autorità pubbliche solo quando la legge lo richiede.</p>
+    <h3>5. Trasferimenti fuori dall'Unione europea</h3>
+    <p>I fornitori indicati possono trattare i dati anche fuori dallo Spazio economico europeo, in particolare negli Stati Uniti. In questi casi il trasferimento avviene con le garanzie previste dal GDPR, come decisioni di adeguatezza (per esempio l'EU-U.S. Data Privacy Framework) o clausole contrattuali standard.</p>
+    <h3>6. Per quanto tempo conserviamo i dati</h3>
+    <ul>
+    <li><strong>Dati tecnici di navigazione</strong>: per il tempo stabilito dal fornitore di hosting per finalità di sicurezza.</li>
+    <li><strong>Messaggi e dati di contatto</strong>: per il tempo necessario a risponderti e a valutare una collaborazione e, se non nasce un incarico, al massimo per 24 mesi dall'ultimo contatto.</li>
+    <li><strong>Dati relativi a un incarico</strong> e documenti fiscali: per il periodo previsto dalla legge, di regola fino a 10 anni.</li>
+    </ul>
+    <h3>7. I tuoi diritti</h3>
+    <p>Puoi chiedere in qualsiasi momento, scrivendo a communikeyexperience@gmail.com o alla PEC cristianogmusa@postecert.it:</p>
+    <ul>
+    <li>l'accesso ai tuoi dati e una copia;</li>
+    <li>la correzione dei dati inesatti;</li>
+    <li>la cancellazione dei dati, quando non servono più;</li>
+    <li>la limitazione del trattamento e l'opposizione, nei casi previsti;</li>
+    <li>la portabilità dei dati che ci hai fornito.</li>
+    </ul>
+    <p>Hai inoltre il diritto di presentare reclamo al Garante per la protezione dei dati personali (www.garanteprivacy.it).</p>
+    <h3>8. Conferimento dei dati</h3>
+    <p>Scriverci è una tua libera scelta. Se decidi di contattarci, ci servono i dati di contatto per poterti rispondere.</p>
+    <h3>9. Sicurezza</h3>
+    <p>Adottiamo misure adeguate a proteggere i dati, come l'uso di fornitori affidabili e l'accesso protetto ai nostri strumenti, e li usiamo solo per le finalità indicate in questa informativa.</p>
+    <h3>10. Modifiche all'informativa</h3>
+    <p>Se questa informativa cambia, pubblicheremo la nuova versione su questa pagina, con la data di aggiornamento.</p>
+    <p class="lgl-date">Data di ultimo aggiornamento: 12 ottobre 2026</p>
+  </div>
+</div>
+</div>
+<div class="lgl-overlay" id="lgl-cookie" hidden>
+<div class="lgl-dialog" role="dialog" aria-modal="true" aria-labelledby="lgl-cookie-t">
+  <div class="lgl-head"><h2 id="lgl-cookie-t">Cookie</h2><button type="button" class="lgl-close" aria-label="Chiudi" data-lgl-close>✕</button></div>
+  <div class="lgl-body">
+    <h3>Questo sito non usa cookie</h3>
+    <p>Il sito zirkonia.ai <strong>non installa cookie</strong> sul tuo dispositivo: né cookie tecnici, né cookie di statistica, né cookie di profilazione o pubblicità. Non usa nemmeno altre tecnologie di memorizzazione del browser (come localStorage) e non contiene strumenti di analisi o tracciamento di terze parti.</p>
+    <p>Per questo non ti chiediamo alcun consenso e non trovi un banner dei cookie.</p>
+    <h3>Nessun servizio esterno al caricamento della pagina</h3>
+    <p>I caratteri tipografici sono ospitati sul sito stesso: quando apri la pagina, il tuo browser non si collega a servizi di terze parti. Il fornitore di hosting registra dati tecnici come l'indirizzo IP per motivi di sicurezza, come spiegato nell'informativa sulla privacy.</p>
+    <h3>Link esterni</h3>
+    <p>Il sito contiene link verso servizi esterni, come WhatsApp per contattarci e il sito di Com &amp; Key Experience. Se li apri, quei servizi possono usare cookie propri, secondo le loro informative.</p>
+    <h3>Le parole nel secondo cervello animato</h3>
+    <p>Quello che scrivi nel secondo cervello animato resta solo sul tuo schermo: non viene salvato né inviato e sparisce quando ricarichi la pagina.</p>
+    <p class="lgl-date">Data di ultimo aggiornamento: 12 ottobre 2026</p>
+  </div>
+</div>
+</div>
+<script>
+(function () {
+  "use strict";
+  var current = null, opener = null;
+  function open(id, from) { var box = document.getElementById(id); if (!box) return; current = box; opener = from; box.hidden = false; document.body.classList.add("lgl-open"); box.querySelector(".lgl-body").scrollTop = 0; box.querySelector("[data-lgl-close]").focus(); }
+  function close() { if (!current) return; current.hidden = true; document.body.classList.remove("lgl-open"); if (opener && opener.focus) opener.focus(); current = opener = null; }
+  document.addEventListener("click", function (e) {
+    var o = e.target.closest && e.target.closest("[data-lgl-open]");
+    if (o) { e.preventDefault(); open(o.getAttribute("data-lgl-open"), o); return; }
+    if (e.target.closest && e.target.closest("[data-lgl-close]")) { close(); return; }
+    if (current && e.target === current) close();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (!current) return;
+    if (e.key === "Escape") { close(); return; }
+    if (e.key === "Tab") { var f = current.querySelectorAll("button, a[href]"), first = f[0], last = f[f.length - 1]; if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); } else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); } }
+  });
+})();
+</script>
 
 <script>
 /* ============================================================
