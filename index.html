@@ -1039,11 +1039,24 @@ class Graph{
         n.x += n.vx; n.y += n.vy;
 
         if(this.mode === 'converge'){
+          // convergenza morbida: i nodi si raccolgono in un'ampia ellisse attorno al centro,
+          // senza collassare in una colonna (attrazione solo fuori dall'ellisse, leggera spinta dentro)
           const cx = W/2, cy = H/2;
-          n.vx += (cx - n.x) * 0.000035;
-          n.vy += (cy - n.y) * 0.0000035 * 0; // keep mostly horizontal drift, gentle
-          n.vy += (cy - n.y) * 0.0000035;
+          const dx = cx - n.x, dy = cy - n.y;
+          const rx = W*0.34, ry = H*0.36;
+          const e = Math.sqrt((dx/rx)*(dx/rx) + (dy/ry)*(dy/ry)) || 0.001;
+          if(e > 1){
+            const k = 0.000018 * Math.min(e - 1, 1.5);
+            n.vx += dx * k; n.vy += dy * k * (rx/ry);
+          } else if(e < 0.6){
+            const k = 0.000012 * (0.6 - e);
+            n.vx -= dx * k; n.vy -= dy * k * (rx/ry);
+          }
+          n.vx += (Math.random() - 0.5) * 0.004;
+          n.vy += (Math.random() - 0.5) * 0.004;
           n.vx *= 0.995; n.vy *= 0.995;
+          const sp = Math.hypot(n.vx, n.vy), maxSp = 0.3;
+          if(sp > maxSp){ n.vx *= maxSp/sp; n.vy *= maxSp/sp; }
         }
 
         if(this.mode === 'hero' && this.mouse.x !== null){
