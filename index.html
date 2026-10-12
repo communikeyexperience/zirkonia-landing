@@ -664,31 +664,31 @@
 <section id="math">
   <div class="section-inner">
     <span class="kicker">Quanto stai perdendo, ogni giorno</span>
-    <h2 style="max-width:none;">Con meno di una riunione al giorno, <em>Perdi L'Equivalente Di 100 Libri L'Anno.</em></h2>
+    <h2 style="max-width:none;">3,2 milioni di parole perse ogni anno, <em>un capitale immenso che non stai sfruttando.</em></h2>
     <p style="margin-top:22px; max-width:640px;">Non servono eventi epocali. Bastano le conversazioni che hai già ogni giorno (riunioni, decisioni, ragionamenti ad alta voce) che oggi, quasi sempre, restano non catturate e scompaiono per sempre.</p>
 
     <div class="stat-grid">
       <div class="stat-card">
-        <div class="num c1">2 ore</div>
+        <div class="num c1">1 ora</div>
         <p>di conversazioni strategiche al giorno, oggi affidate solo alla tua memoria.</p>
       </div>
       <div class="stat-card">
-        <div class="num c2">8.400 parole</div>
+        <div class="num c2">8.800 parole</div>
         <p>prodotte in ogni ora di parlato. Quante ne ricorderai domani?</p>
       </div>
       <div class="stat-card">
-        <div class="num c3">620 ore</div>
+        <div class="num c3">365 ore</div>
         <p>di parlato strategico ogni anno. Quasi tutte, disperse.</p>
       </div>
       <div class="stat-card">
-        <div class="num c4">5,2 milioni</div>
-        <p>di parole prodotte in un anno: l'equivalente di 100 libri, mai scritti.</p>
+        <div class="num c4">3,2 milioni</div>
+        <p>di parole prodotte in un anno: l'equivalente di 36 libri, mai scritti.</p>
       </div>
     </div>
 
     <div class="equivalence">
-      <h3>100 libri che nessuno leggerà mai. <em>A Meno Che Tu Non Li Catturi.</em></h3>
-      <p>ZirkonIA<sup class="tm">™</sup> trasforma ogni conversazione in un capitolo permanente della tua intelligenza, così quello che oggi si perde in un attimo, domani lavora per te per sempre.</p>
+      <h3>Ogni 10 giorni perdi un libro intero. <em>A Meno Che Tu Non Lo Catturi.</em></h3>
+      <p>Un'ora al giorno di conversazioni non catturate vale un romanzo di 90.000 parole ogni 10 giorni: idee, decisioni e ragionamenti che nessuno potrà più rileggere. ZirkonIA<sup class="tm">™</sup> trasforma ogni conversazione in un capitolo permanente della tua intelligenza, così quello che oggi si perde in un attimo, domani lavora per te per sempre.</p>
 
       <div class="metaphor-row">
         <div class="m-card">
@@ -703,7 +703,7 @@
     </div>
 
     <div class="bookshelf-wrap">
-      <div class="bookshelf-caption">100 libri: <em>Un Anno Del Tuo Sapere, Non Ancora Catturato.</em></div>
+      <div class="bookshelf-caption">36 libri: <em>Un Anno Del Tuo Sapere, Non Ancora Catturato.</em></div>
       <div class="bookshelf" id="bookshelf"></div>
       <div class="bookshelf-payoff">Bastano sei mesi di apprendimento. Poi ti basterà chiedere: il tuo libro, il protocollo della tua azienda, generati da <em>Una Singola Richiesta</em>, con un valore che da solo può superare i <em>3.000-4.000€.</em></div>
     </div>
@@ -1730,7 +1730,7 @@ input.addEventListener('keydown', (e) => {
 });
 sendBtn.addEventListener('click', submitThought);
 
-/* ---------- 100-book grid, colored like the living brain, each with a
+/* ---------- 36-book grid (un anno: 8.800 parole/ora x 365 ore = 3,2 milioni di parole / 90.000 parole a libro), colored like the living brain, each with a
    different micro-cover graphic, fully shuffled ---------- */
 (function(){
   const shelf = document.getElementById('bookshelf');
@@ -1782,7 +1782,7 @@ sendBtn.addEventListener('click', submitThought);
   const patternKeys = Object.keys(patterns);
 
   let colors = [];
-  for(let i=0;i<100;i++){
+  for(let i=0;i<36;i++){
     colors.push(Math.random() < 0.25 ? randomVividColor() : basePalette[i % basePalette.length]);
   }
   colors = shuffled(colors);
