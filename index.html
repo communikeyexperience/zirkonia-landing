@@ -264,6 +264,13 @@
   .btn-primary:hover{ background: var(--glow-2); }
   sup.tm{ font-size:.42em; font-weight:500; font-style:normal; letter-spacing:0; line-height:1; vertical-align:baseline; position:relative; top:-1.05em; margin-left:.08em; }
   .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  /* Slogan in evidenza tra «Quanto stai perdendo» e «Chi è ZirkonIA» */
+  .motto{ font-family:'Fraunces', serif; font-style:italic; font-weight:400; font-size:clamp(40px, 6.4vw, 80px); line-height:1.08; letter-spacing:-0.01em; color:var(--ink); text-align:center; max-width:none; margin:0 auto 110px; }
+  .motto span, .motto em{ white-space:nowrap; }
+  .motto em{ font-style:italic; color:var(--glow-2); text-shadow:0 0 18px rgba(127,176,255,.55), 0 0 42px rgba(77,127,255,.32); }
+  .motto::after{ content:""; display:block; width:72px; height:1px; margin:36px auto 0; background:linear-gradient(90deg, transparent, rgba(127,176,255,.7), transparent); }
+  @media (max-width: 760px){ .motto{ margin-bottom:80px; } .motto::after{ margin-top:26px; } }
+  #what .section-inner{ padding-top:0; } /* distanza dal blocco precedente dimezzata (richiesta di Cristiano) */
   a.btn, a.nav-cta{ display:inline-block; text-decoration:none; }
   .btn-ghost{ background:transparent; color:var(--silver); border-color: rgba(199,208,224,0.22); }
   .btn-ghost:hover{ border-color: rgba(199,208,224,0.55); }
@@ -712,6 +719,7 @@
 
 <section id="what">
   <div class="section-inner narrow center">
+    <p class="motto" lang="la"><span>Verba volant,</span> <em>data manent.</em></p>
     <span class="kicker">Chi è ZirkonIA<sup class="tm">™</sup>?</span>
     <h2 style="max-width:none;">Più di un assistente: <em>Un'Infrastruttura Di Intelligenza Multipiattaforma.</em></h2>
     <p style="margin-top:24px;">ZirkonIA<sup class="tm">™</sup> è costruito su un'architettura di livello enterprise, pensata per scala e sicurezza. Ogni conversazione, documento e decisione viene indicizzato in un database vettoriale ad alte prestazioni, che trasforma il linguaggio naturale in conoscenza interrogabile in tempo reale. Un motore di retrieval intelligente individua solo l'informazione rilevante e la combina con modelli linguistici avanzati di ultima generazione, elaborati su infrastrutture cloud isolate per ogni cliente. Il risultato: un sistema che comprende il contesto, riconosce pattern nel tempo, e risponde con la tua voce reale.</p>
