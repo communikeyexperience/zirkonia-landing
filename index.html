@@ -643,6 +643,498 @@
   @media (prefers-reduced-motion: reduce){
     .eyebrow, .wordmark-wrap, .payoff, .hero-sub, .cta-row{ animation:none; opacity:1; }
   }
+
+  /* =========================================================
+     BLOCCO "PIEGHEVOLE" — stile chiaro ereditato dal pieghevole A4
+     ========================================================= */
+  .pg{
+    --pg-ink:#111318;
+    --pg-text:#4f5461;
+    --pg-soft:#f3f4f7;
+    --pg-orange:#2457c5;
+    --pg-num:#2457c5;
+    --pg-red:#e3161b;
+    --pg-blue:#1d4a9c;
+    background:#fff;
+    color:var(--pg-ink);
+    font-family:'Montserrat', 'Inter', sans-serif;
+  }
+  .pg section{ position:relative; }
+  .pg img{ height:auto; max-width:100%; }
+  .pg #pg-pesce .brandmark, .pg .motto-logo{ mix-blend-mode:multiply; }
+  .pg .pg-inner{
+    position:relative; z-index:2;
+    max-width:1080px; margin:0 auto;
+    padding:120px 32px;
+  }
+  .pg .pg-kicker{
+    display:block;
+    font-size:13px; font-weight:700;
+    letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--pg-orange);
+    margin-bottom:18px;
+  }
+  .pg h2{
+    font-family:'Montserrat', sans-serif;
+    font-weight:800;
+    font-size:clamp(34px, 5vw, 58px);
+    line-height:1.06;
+    letter-spacing:-0.025em;
+    color:var(--pg-ink);
+    max-width:none;
+  }
+  .pg p{
+    font-family:'Montserrat', sans-serif;
+    font-weight:400;
+    font-size:17px; line-height:1.75;
+    color:var(--pg-text);
+  }
+  .pg p strong, .pg p b{ color:var(--pg-ink); font-weight:700; }
+
+  /* reveal on scroll */
+  .pg .rv{ opacity:0; transform:translateY(26px); transition:opacity .9s ease, transform .9s ease; }
+  .pg .rv.in{ opacity:1; transform:none; }
+  .pg .rv.d1{ transition-delay:.12s; } .pg .rv.d2{ transition-delay:.24s; } .pg .rv.d3{ transition-delay:.36s; }
+
+  /* ---------- 1. pesce rosso ---------- */
+  #pg-pesce{ background:#fff; overflow:hidden; }
+  #pg-pesce .pg-inner{ text-align:center; padding-top:110px; padding-bottom:100px; }
+  #pg-pesce h2{ font-size:clamp(36px, 6vw, 72px); max-width:14ch; margin:0 auto; }
+  #pg-pesce h2 .rosso{ color:var(--pg-red); }
+  #pg-pesce .fish-wrap{
+    position:relative;
+    width:min(640px, 88vw);
+    margin:40px auto 0;
+  }
+  #pg-pesce .fish-swim{ animation: pgSwim 6s ease-in-out infinite; transform-origin:60% 50%; }
+  #pg-pesce .fish-swim{ position:relative; }
+  #pg-pesce .fish-static{ display:block; width:100%; height:auto; }
+  #pg-pesce .fish-gl{ position:absolute; inset:0; width:100%; height:100%; display:block; opacity:0; }
+  #pg-pesce .gl-on .fish-gl{ opacity:1; }
+  #pg-pesce .gl-on .fish-static{ visibility:hidden; }
+  /* ombra a terra: ferma, si stringe e schiarisce quando il pesce sale */
+  #pg-pesce .fish-shadow{
+    width:56%; height:26px; margin:46px auto 0;
+    border-radius:50%;
+    background:radial-gradient(ellipse at center, rgba(17,19,24,0.22) 0%, rgba(17,19,24,0.10) 45%, transparent 72%);
+    filter:blur(2px);
+    animation: pgShadow 6s ease-in-out infinite;
+  }
+  @keyframes pgSwim{
+    0%,100%{ transform:translate(0,0) rotate(0deg); }
+    50%{ transform:translate(-10px,-22px) rotate(-1.5deg); }
+  }
+  @keyframes pgShadow{
+    0%,100%{ transform:translateX(0) scaleX(1); opacity:1; }
+    50%{ transform:translateX(-10px) scaleX(0.82); opacity:.55; }
+  }
+  #pg-pesce .brandmark{ width:min(380px, 74vw); margin:48px auto 0; display:block; }
+  #pg-pesce .claim{
+    margin-top:30px;
+    font-weight:700; font-size:clamp(22px, 2.6vw, 30px);
+    letter-spacing:-0.01em; color:var(--pg-ink);
+  }
+  #pg-pesce .claim-sub{ margin-top:8px; font-size:18px; line-height:1.6; }
+
+  /* ---------- 2. problema ---------- */
+  #pg-problema{ background:#fff; border-top:1px solid #eceef2; }
+  .pg .two-col{
+    display:grid; grid-template-columns: 1.05fr 0.95fr; gap:64px; align-items:center;
+  }
+  #pg-problema .molecule{
+    display:block; width:min(360px, 70vw); margin:0 auto;
+    -webkit-mask-image: radial-gradient(circle at 50% 52%, #000 58%, transparent 72%);
+            mask-image: radial-gradient(circle at 50% 52%, #000 58%, transparent 72%);
+    animation: pgBob 8s ease-in-out infinite;
+  }
+  @keyframes pgBob{
+    0%,100%{ transform:translateY(0) scale(1); }
+    50%{ transform:translateY(-10px) scale(1.03); }
+  }
+  #pg-problema p{ margin-top:24px; }
+  #pg-problema .stat{
+    margin-top:72px; padding-top:48px;
+    border-top:1px solid #dfe2e8;
+    text-align:center;
+  }
+  #pg-problema .stat .big{
+    font-weight:800; letter-spacing:-0.03em;
+    font-size:clamp(56px, 9vw, 110px); line-height:1;
+    color:var(--pg-num);
+  }
+  #pg-problema .stat .what{
+    margin-top:10px; font-weight:600; font-size:clamp(19px, 2.2vw, 26px); color:var(--pg-ink);
+  }
+  #pg-problema .stat .note{ margin-top:6px; font-size:16px; }
+
+  /* ---------- 3. risposta + come funziona ---------- */
+  #pg-risposta{ background:#fff; }
+  #pg-risposta .lead p{ margin-top:22px; }
+  #pg-risposta .how h3{
+    font-weight:700; font-size:26px; letter-spacing:-0.01em; margin-bottom:28px; color:var(--pg-ink);
+  }
+  .pg .how-step{ display:flex; gap:20px; align-items:flex-start; margin-bottom:26px; }
+  .pg .how-step:last-child{ margin-bottom:0; }
+  .pg .how-step .n{
+    flex-shrink:0; width:46px; height:46px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:16px;
+    background:#fff; color:var(--pg-ink);
+    box-shadow:0 2px 10px rgba(17,19,24,0.06);
+  }
+  .pg .how-step:last-child .n{ background:var(--pg-ink); color:#fff; }
+  .pg .how-step p{ font-size:16.5px; line-height:1.65; margin:0; padding-top:9px; }
+
+  /* ---------- 4. touch (nero) ---------- */
+  #pg-touch{ background:#000; color:#fff; text-align:center; overflow:hidden; }
+  #pg-touch .pg-kicker{ color:#bfc3cc; letter-spacing:0.22em; }
+  #pg-touch h2{ color:#fff; font-size:clamp(40px, 6.4vw, 76px); }
+  #pg-touch .card{
+    display:block; width:min(440px, 78vw); margin:46px auto 30px;
+    -webkit-mask-image: radial-gradient(ellipse 50% 52% at 50% 50%, #000 70%, transparent 100%);
+            mask-image: radial-gradient(ellipse 50% 52% at 50% 50%, #000 70%, transparent 100%);
+    animation: pgFloat 7s ease-in-out infinite;
+  }
+  @keyframes pgFloat{
+    0%,100%{ transform:translateY(0) rotate(0deg); }
+    50%{ transform:translateY(-12px) rotate(1.2deg); }
+  }
+  #pg-touch .t-sub{ color:#a9aeb9; font-size:17px; }
+  #pg-touch .t-claim{ margin-top:8px; font-weight:800; font-size:clamp(26px, 3.2vw, 36px); letter-spacing:-0.01em; color:#fff; }
+  #pg-touch .t-body{ color:#d8dbe2; max-width:560px; margin:22px auto 0; }
+  #pg-touch .t-foot{ color:#7d828e; font-size:15px; margin-top:56px; }
+
+  /* ---------- 5. per te ---------- */
+  #pg-perte{ background:#fff; }
+  .pg .change-grid{
+    margin-top:48px;
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:38px 56px;
+  }
+  .pg .change-grid h3{ font-weight:700; font-size:21px; color:var(--pg-ink); margin-bottom:8px; }
+  .pg .change-grid p{ font-size:16.5px; line-height:1.65; }
+  .pg .start-box{
+    margin-top:64px;
+    background:var(--pg-soft);
+    border-radius:22px;
+    padding:40px 44px;
+    display:grid; grid-template-columns:1fr auto; gap:32px; align-items:center;
+  }
+  .pg .start-box h3{ font-weight:700; font-size:26px; color:var(--pg-ink); margin-bottom:12px; }
+  .pg .start-box p{ font-size:16.5px; line-height:1.65; }
+  .pg .start-box p + p{ margin-top:14px; }
+  .pg .pg-btn{
+    display:inline-block;
+    font-family:'Montserrat', sans-serif; font-weight:700; font-size:15px;
+    padding:17px 30px; border-radius:999px;
+    background:var(--pg-ink); color:#fff; text-decoration:none;
+    cursor:pointer; white-space:nowrap;
+    transition:background .25s ease, transform .2s ease;
+  }
+  .pg .pg-btn:hover{ background:var(--pg-blue); transform:translateY(-2px); }
+
+  /* ---------- 6. chiusura pieghevole ---------- */
+  #pg-chiusura{ background:var(--pg-soft); text-align:center; }
+  #pg-chiusura .pg-inner{ padding-top:110px; padding-bottom:110px; background:var(--pg-soft); }
+  #pg-chiusura h2{ max-width:16ch; margin:0 auto; }
+  #pg-chiusura p.lead{ margin:22px auto 0; max-width:520px; }
+  #pg-chiusura .pg-btn{ margin-top:34px; }
+  #pg-chiusura .web{ margin-top:46px; }
+  #pg-chiusura .web small{
+    display:block; font-weight:600; font-size:12px; letter-spacing:0.2em; color:var(--pg-text);
+  }
+  #pg-chiusura .web span{ font-weight:700; font-size:26px; color:var(--pg-ink); }
+  #pg-chiusura .motto{
+    margin-top:64px;
+    font-weight:700; font-size:15px; letter-spacing:0.16em; line-height:1.6; color:var(--pg-ink);
+  }
+  #pg-chiusura .motto-logo{ display:block; width:min(220px, 56vw); margin:18px auto 0; }
+
+  @media (max-width: 860px){
+    .pg .pg-inner{ padding:84px 22px; }
+    .pg .two-col{ grid-template-columns:1fr; gap:40px; }
+    #pg-problema .molecule{ order:-1; width:min(260px, 64vw); }
+    .pg .change-grid{ grid-template-columns:1fr; gap:28px; }
+    .pg .start-box{ grid-template-columns:1fr; padding:30px 24px; }
+    .pg .pg-btn{ white-space:normal; text-align:center; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    #pg-pesce .fish-swim, #pg-pesce .fish-shadow, #pg-problema .molecule, #pg-touch .card{ animation:none; }
+    .pg .rv{ opacity:1; transform:none; transition:none; }
+  }
+
+  /* ---------- 3b. personal / company brain ---------- */
+  #pg-brains{ background:#fff; }
+  .pg .brain-cards{ margin-top:52px; display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+  .pg .brain-card{
+    background:var(--pg-soft); border-radius:22px; padding:40px 38px;
+    display:flex; flex-direction:column;
+  }
+  .pg .brain-card .tag{
+    align-self:flex-start;
+    font-weight:700; font-size:12px; letter-spacing:0.16em; text-transform:uppercase;
+    padding:7px 14px; border-radius:999px;
+    background:#fff; color:var(--pg-blue);
+  }
+  .pg .brain-card h3{ margin:22px 0 12px; font-weight:800; font-size:clamp(24px, 2.6vw, 30px); letter-spacing:-0.015em; color:var(--pg-ink); }
+  .pg .brain-card p{ font-size:16.5px; line-height:1.7; }
+  .pg .brain-card ul{ list-style:none; margin-top:24px; padding-top:22px; border-top:1px solid rgba(17,19,24,0.1); }
+  .pg .brain-card li{
+    position:relative; padding-left:26px; margin-top:10px;
+    font-weight:600; font-size:15.5px; line-height:1.5; color:var(--pg-ink);
+  }
+  .pg .brain-card li::before{
+    content:""; position:absolute; left:0; top:7px;
+    width:9px; height:9px; border-radius:50%; background:var(--pg-num);
+  }
+  .pg .brain-card.dark{ background:var(--pg-ink); }
+  .pg .brain-card.dark .tag{ background:rgba(255,255,255,0.1); color:#9fbcff; }
+  .pg .brain-card.dark h3{ color:#fff; }
+  .pg .brain-card.dark p{ color:#b9bdc7; }
+  .pg .brain-card.dark ul{ border-top-color:rgba(255,255,255,0.12); }
+  .pg .brain-card.dark li{ color:#fff; }
+  @media (max-width: 860px){
+    .pg .brain-cards{ grid-template-columns:1fr; }
+    .pg .brain-card{ padding:30px 24px; }
+  }
+
+  /* ---------- 2b. lo studio ---------- */
+  #pg-studio{ background:var(--pg-soft); }
+  #pg-studio h2{ font-size:clamp(32px, 4.6vw, 56px); }
+  #pg-studio h2 .count{ color:var(--pg-num); }
+  .pg .accent{ color:var(--pg-num); }
+  #pg-studio p.lead{ margin-top:26px; max-width:700px; font-size:18px; }
+  .pg .calc{
+    margin-top:56px;
+    display:grid; grid-template-columns: repeat(4, 1fr);
+    align-items:stretch; gap:16px;
+  }
+  .pg .calc-card{
+    background:#fff; border-radius:20px; padding:28px 22px;
+    box-shadow:0 1px 0 rgba(17,19,24,0.04), 0 14px 34px -18px rgba(17,19,24,0.18);
+  }
+  .pg .calc-card .v{
+    font-weight:800; letter-spacing:-0.02em; line-height:1.05;
+    font-size:clamp(26px, 2.5vw, 34px);
+  }
+  .pg .calc-card .v.c1{ color:#3f7de8; } .pg .calc-card .v.c2{ color:#1fae80; }
+  .pg .calc-card .v.c3{ color:#e3a21f; } .pg .calc-card .v.c4{ color:#e0622b; }
+  .pg .calc-card p{ margin-top:10px; font-size:14.5px; line-height:1.55; }
+  .pg .calc .op{
+    display:inline-block; margin-bottom:16px;
+    font-weight:700; font-size:13px; white-space:nowrap;
+    color:var(--pg-text);
+    padding:7px 10px; border-radius:999px;
+    border:1px solid #dcdfe6; background:var(--pg-soft);
+  }
+
+  .pg .shelf-box{
+    margin-top:40px; background:#fff; border-radius:24px; padding:40px 40px 36px;
+    box-shadow:0 14px 40px -24px rgba(17,19,24,0.2);
+  }
+  .pg .shelf-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; }
+  .pg .shelf-head h3{ font-weight:800; font-size:clamp(22px, 2.6vw, 30px); line-height:1.2; letter-spacing:-0.015em; max-width:26ch; color:var(--pg-ink); }
+  .pg .shelf-counter{ text-align:right; flex-shrink:0; }
+  .pg .shelf-counter span{ display:block; font-weight:800; font-size:44px; line-height:1; color:var(--pg-ink); font-variant-numeric:tabular-nums; }
+  .pg .shelf-counter small{ font-weight:600; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:var(--pg-text); }
+  .pg .pg-shelf{
+    margin-top:34px;
+    display:grid; grid-template-columns:repeat(9, 1fr); gap:22px 16px;
+    padding:6px 4px 0;
+  }
+  .pg .pg-book{
+    position:relative;
+    aspect-ratio: 2 / 3;
+    border-radius:2px 5px 5px 2px;
+    overflow:hidden;
+    box-shadow:
+      2px 2px 0 #f4f1ea, 3px 3px 0 #dcd7cc,
+      0 14px 22px -10px rgba(17,19,24,0.45);
+    opacity:0; transform:translateY(16px) rotate(var(--tilt, 0deg)) scale(.92);
+    transition:opacity .5s ease, transform .5s cubic-bezier(.2,.8,.3,1.25), box-shadow .3s ease;
+  }
+  .pg .pg-shelf.on .pg-book{ opacity:1; transform:rotate(var(--tilt, 0deg)); }
+  .pg .pg-shelf.on .pg-book:hover{
+    transform:translateY(-8px) rotate(0deg) scale(1.06); transition-delay:0s !important;
+    box-shadow: 2px 2px 0 #f4f1ea, 3px 3px 0 #dcd7cc, 0 22px 30px -12px rgba(17,19,24,0.5);
+    z-index:2;
+  }
+  .pg .pg-book svg{ width:100%; height:100%; display:block; }
+  /* dorso e lucentezza */
+  .pg .pg-book::before{
+    content:""; position:absolute; inset:0 auto 0 0; width:9%;
+    background:linear-gradient(90deg, rgba(0,0,0,.28), rgba(255,255,255,.18) 55%, rgba(0,0,0,.08));
+    pointer-events:none;
+  }
+  .pg .pg-book::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(115deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,0) 38%, rgba(0,0,0,.06) 100%);
+    pointer-events:none;
+  }
+  .pg .shelf-caption{ margin-top:22px; text-align:center; font-weight:700; font-size:16px; color:var(--pg-ink); }
+  .pg .shelf-cols{
+    margin-top:30px; padding-top:28px; border-top:1px solid #e6e8ee;
+    display:grid; grid-template-columns:1fr 1fr; gap:36px;
+  }
+  .pg .shelf-cols h4{ font-weight:700; font-size:17px; color:var(--pg-ink); margin-bottom:6px; }
+  .pg .shelf-cols p{ font-size:15px; line-height:1.65; }
+
+  .pg .payoff-box{
+    margin-top:24px; background:var(--pg-ink); border-radius:24px;
+    padding:40px 44px;
+    display:grid; grid-template-columns:1fr auto; gap:36px; align-items:center;
+  }
+  .pg .payoff-box p{ color:#c3c7d0; font-size:18px; line-height:1.65; }
+  .pg .payoff-box p strong{ color:#fff; }
+  .pg .payoff-num{
+    font-weight:800; font-size:clamp(34px, 4.4vw, 54px); letter-spacing:-0.025em; white-space:nowrap;
+    color:#ff8a4c;
+  }
+  .pg .method{ margin-top:22px; }
+  .pg .method summary{
+    cursor:pointer; list-style:none;
+    font-weight:600; font-size:14px; color:var(--pg-text);
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .pg .method summary::-webkit-details-marker{ display:none; }
+  .pg .method summary::before{
+    content:"+"; display:inline-flex; align-items:center; justify-content:center;
+    width:20px; height:20px; border-radius:50%; border:1px solid #c9cdd6; font-size:13px;
+  }
+  .pg .method[open] summary::before{ content:"–"; }
+  .pg .method p{ margin-top:12px; max-width:760px; font-size:14.5px; line-height:1.7; }
+  .pg .method p + p{ margin-top:8px; }
+
+  @media (max-width: 960px){
+    .pg .calc{ grid-template-columns:1fr 1fr; }
+    .pg .pg-shelf{ grid-template-columns:repeat(6, 1fr); }
+  }
+  @media (max-width: 860px){
+    .pg .shelf-box{ padding:28px 20px; }
+    .pg .shelf-head{ flex-direction:column; align-items:flex-start; }
+    .pg .shelf-counter{ text-align:left; }
+    .pg .shelf-cols{ grid-template-columns:1fr; gap:22px; }
+    .pg .payoff-box{ grid-template-columns:1fr; padding:30px 24px; gap:14px; }
+  }
+  @media (max-width: 420px){
+    .pg .calc{ grid-template-columns:1fr; }
+    .pg .pg-shelf{ grid-template-columns:repeat(4, 1fr); gap:16px 12px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .pg .pg-book{ opacity:1; transform:none; transition:none; }
+  }
+
+  /* ---------- 5b. il capitale (scuro) ---------- */
+  #pg-capitale{ background:#0d0f14; color:#fff; overflow:hidden; }
+  #pg-capitale::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(ellipse 60% 45% at 80% 20%, rgba(70,110,230,.22), transparent 70%),
+               radial-gradient(ellipse 50% 40% at 10% 90%, rgba(70,110,230,.12), transparent 70%);
+  }
+  #pg-capitale .pg-kicker{ color:#8fb4ff; }
+  #pg-capitale h2{ color:#fff; font-size:clamp(40px, 6vw, 74px); }
+  #pg-capitale .hl{ color:#8fb4ff; }
+  #pg-capitale p{ color:#b7bcc8; }
+  #pg-capitale p strong{ color:#fff; }
+  #pg-capitale p.lead{ margin-top:26px; max-width:680px; font-size:18.5px; }
+
+  .pg .cap-grid{ margin-top:64px; display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center; }
+  .pg .growth{
+    background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.08);
+    border-radius:24px; padding:26px 22px 14px;
+  }
+  .pg .growth svg{ width:100%; height:auto; display:block; overflow:visible; }
+  .pg .growth .line{ stroke-dasharray:720; stroke-dashoffset:720; transition:stroke-dashoffset 2.2s cubic-bezier(.4,0,.2,1) .2s; }
+  .pg .growth .area{ opacity:0; transition:opacity 1.2s ease 1.4s; }
+  .pg .growth .pts circle{ fill:#0d0f14; stroke:#8fb4ff; stroke-width:3; opacity:0; transition:opacity .4s ease; }
+  .pg .growth .pts circle:nth-child(1){ transition-delay:1s; } .pg .growth .pts circle:nth-child(2){ transition-delay:1.5s; }
+  .pg .growth .pts circle:nth-child(3){ transition-delay:2.2s; fill:#8fb4ff; }
+  .pg .growth .lbl text{ fill:#fff; }
+  .pg .growth.in .line{ stroke-dashoffset:0; }
+  .pg .growth.in .area, .pg .growth.in .pts circle{ opacity:1; }
+  .pg .cap-step{ padding:18px 0 18px 22px; border-left:2px solid rgba(143,180,255,.25); }
+  .pg .cap-step + .cap-step{ margin-top:6px; }
+  .pg .cap-step:last-child{ border-left-color:#8fb4ff; }
+  .pg .cap-step .when{ display:block; font-weight:800; font-size:18px; color:#fff; margin-bottom:6px; }
+  .pg .cap-step p{ font-size:15.5px; line-height:1.6; }
+
+  .pg .twice{ margin-top:96px; }
+  .pg .twice h3, .pg .intel h3{ font-weight:800; font-size:clamp(26px, 3.2vw, 38px); letter-spacing:-0.02em; line-height:1.15; color:#fff; }
+  .pg .twice-grid{ margin-top:30px; display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .pg .twice-grid > div{
+    background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08);
+    border-radius:20px; padding:30px 30px 28px;
+  }
+  .pg .twice-grid .n{ font-weight:800; font-size:13px; letter-spacing:.14em; color:#8fb4ff; }
+  .pg .twice-grid h4{ margin:12px 0 8px; font-weight:700; font-size:20px; line-height:1.3; color:#fff; }
+  .pg .twice-grid p{ font-size:15.5px; line-height:1.65; }
+
+  .pg .intel{
+    margin-top:24px; border-radius:24px; padding:44px 44px 40px;
+    background:linear-gradient(135deg, #1b3f8f 0%, #2457c5 55%, #3b6fe0 100%);
+    position:relative; overflow:hidden;
+  }
+  .pg .intel::after{
+    content:""; position:absolute; right:-80px; top:-80px; width:300px; height:300px; border-radius:50%;
+    background:radial-gradient(circle, rgba(255,255,255,.18), transparent 65%); pointer-events:none;
+  }
+  .pg .intel .pg-kicker{ color:#cfe0ff; }
+  .pg .intel > p{ margin-top:16px; max-width:720px; color:#e2eaff; font-size:17px; }
+  .pg .intel > p strong{ color:#fff; }
+  .pg .intel-pillars{ margin-top:32px; display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; position:relative; z-index:1; }
+  .pg .intel-pillars > div{ border-top:1px solid rgba(255,255,255,.28); padding-top:18px; }
+  .pg .intel-pillars .dot{ display:inline-block; width:10px; height:10px; border-radius:50%; background:#fff; box-shadow:0 0 0 5px rgba(255,255,255,.18); }
+  .pg .intel-pillars h4{ margin:14px 0 6px; font-weight:800; font-size:19px; color:#fff; }
+  .pg .intel-pillars p{ font-size:15px; line-height:1.55; color:#d6e2ff; }
+
+  .pg .cap-final{ margin-top:96px; text-align:center; }
+  .pg .cap-final .vs{ display:flex; flex-direction:column; gap:6px; font-size:clamp(17px, 2vw, 21px); color:#8c92a0; }
+  .pg .cap-final .vs span{ text-decoration:line-through; text-decoration-color:rgba(255,255,255,.35); text-decoration-thickness:1.5px; }
+  .pg .cap-final .big{
+    margin:22px auto 0; max-width:18ch;
+    font-weight:800; font-size:clamp(32px, 4.6vw, 56px); line-height:1.1; letter-spacing:-0.025em; color:#fff;
+  }
+  .pg .cap-final .own{ margin-top:22px; font-size:15px; color:#8c92a0; }
+
+  @media (max-width: 860px){
+    .pg .cap-grid{ grid-template-columns:1fr; gap:34px; margin-top:44px; }
+    .pg .twice{ margin-top:64px; }
+    .pg .twice-grid, .pg .intel-pillars{ grid-template-columns:1fr; }
+    .pg .intel{ padding:30px 24px; }
+    .pg .cap-final{ margin-top:64px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .pg .growth .line{ stroke-dashoffset:0; transition:none; }
+    .pg .growth .area, .pg .growth .pts circle{ opacity:1; transition:none; }
+  }
+  #pg-capitale .cap-final .big{ color:#fff; }
+  #pg-capitale .intel > p{ color:#e2eaff; }
+  #pg-capitale .intel-pillars p{ color:#d6e2ff; }
+
+  /* ---------- demo interattiva (spostata nel blocco) ---------- */
+  .pg #brain{ background:#0d0f14; padding:0 0 100px; overflow:hidden; }
+  .pg #brain .section-inner{ padding:110px 32px 0; max-width:1000px; }
+  .pg #brain h2{ color:#fff; font-size:clamp(34px, 5vw, 60px); max-width:none; margin:0 auto; }
+  .pg #brain .hl{ color:#8fb4ff; }
+  .pg #brain .pg-kicker{ color:#8fb4ff; }
+  .pg #brain .subhead{ margin:22px auto 30px; color:#b7bcc8; font-size:16.5px; line-height:1.65; max-width:520px; }
+  .pg #brain .input-row input, .pg #brain .hint{ font-family:'Montserrat', sans-serif; }
+  .pg #brain .hint{ color:#7d828e; }
+
+  /* ---------- provato sul campo ---------- */
+  .pg .proof{
+    margin-top:24px; border-radius:24px; padding:40px 44px;
+    border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.035);
+  }
+  .pg .proof .pg-kicker{ color:#8fb4ff; }
+  #pg-capitale .proof .q{ font-weight:700; font-size:clamp(20px, 2.4vw, 26px); line-height:1.4; color:#fff; max-width:760px; }
+  #pg-capitale .proof p + p{ margin-top:12px; max-width:720px; font-size:16px; }
+
+  /* ---------- pulsanti come link + ancore sotto la barra ---------- */
+  a.nav-cta, a.btn{ display:inline-block; text-decoration:none; }
+  a.btn-primary{ color:var(--bg); } a.btn-ghost{ color:var(--silver); } a.nav-cta{ color:var(--ink); }
+  .pg section{ scroll-margin-top:64px; }
+  @media (max-width: 860px){ .pg .proof{ padding:30px 24px; } .pg #brain .section-inner{ padding:84px 22px 0; } }
+
 </style>
 </head>
 <body>
@@ -650,7 +1142,7 @@
 <header class="nav">
   <div class="nav-inner">
     <div class="nav-logo">Zirkon<span class="ia">IA</span><sup class="tm">™</sup></div>
-    <a class="nav-cta" href="https://wa.me/393484925505" data-wa-text="Buongiorno%2C%20vi%20sto%20contattando%20per%20una%20call%20su%20ZirkonIA.%20Vorrei%20raccontarvi%20chi%20sono%2C%20come%20lavoro%20e%20cosa%20vorrei%20dal%20mio%20secondo%20cervello." target="_blank" rel="noopener">Prenota una call</a>
+    <a class="nav-cta" href="https://wa.me/393484925505" data-wa-text="Buongiorno%2C%20vi%20sto%20contattando%20per%20una%20call%20su%20ZirkonIA.%20Vorrei%20raccontarvi%20chi%20sono%2C%20come%20lavoro%20e%20cosa%20vorrei%20dal%20mio%20secondo%20cervello." target="_blank" rel="noopener">Prenota una consulenza</a>
   </div>
 </header>
 
@@ -662,127 +1154,116 @@
     <div class="payoff">Your <span class="limitless-glow">Limitless</span> brain.</div>
     <p class="hero-sub">Il sapere di una vita, trasformato in intelligenza che lavora sempre al tuo fianco, ovunque tu sia.</p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="https://wa.me/393484925505" data-wa-text="Buongiorno%2C%20vi%20sto%20contattando%20per%20una%20call%20su%20ZirkonIA.%20Vorrei%20raccontarvi%20chi%20sono%2C%20come%20lavoro%20e%20cosa%20vorrei%20dal%20mio%20secondo%20cervello." target="_blank" rel="noopener">Prenota una call</a>
-      <a class="btn btn-ghost" href="#solution">Scopri come funziona</a>
+      <a class="btn btn-primary" href="https://wa.me/393484925505" data-wa-text="Buongiorno%2C%20vi%20sto%20contattando%20per%20una%20call%20su%20ZirkonIA.%20Vorrei%20raccontarvi%20chi%20sono%2C%20come%20lavoro%20e%20cosa%20vorrei%20dal%20mio%20secondo%20cervello." target="_blank" rel="noopener">Prenota una consulenza</a>
+      <a class="btn btn-ghost" href="#pg-risposta">Scopri come funziona</a>
     </div>
   </div>
   <div class="scroll-hint">scorri</div>
 </section>
 
-<section id="math">
-  <div class="section-inner">
-    <span class="kicker">Quanto stai perdendo, ogni giorno</span>
-    <h2 style="max-width:none;">3,2 milioni di parole perse ogni anno! <em>Un capitale immenso che non stai sfruttando.</em></h2>
-    <p style="margin-top:22px; max-width:640px;">Abbiamo analizzato gli studi sulla velocità media del parlato. <strong class="hl">Il risultato ci ha sorpresi</strong>: in una sola ora di riunioni, decisioni e ragionamenti ad alta voce produci 8.800 parole. Nessuno le scrive, nessuno le conserva. Domani te ne resterà un’impressione. Tra un anno, niente.</p>
+<!-- =========================================================
+     BLOCCO "PIEGHEVOLE" — contenuti dal pieghevole A4 ZirkonIA
+     ========================================================= -->
+<div class="pg" id="pieghevole">
 
-    <div class="stat-grid">
-      <div class="stat-card">
-        <div class="num c1">1 ora</div>
-        <p>di conversazioni strategiche al giorno, oggi affidate solo alla tua memoria.</p>
-      </div>
-      <div class="stat-card">
-        <div class="num c2">8.800 parole</div>
-        <p>prodotte in ogni ora di parlato. Quante ne ricorderai domani?</p>
-      </div>
-      <div class="stat-card">
-        <div class="num c3">365 ore</div>
-        <p>di parlato strategico ogni anno. Quasi tutte, disperse.</p>
-      </div>
-      <div class="stat-card">
-        <div class="num c4">3,2 milioni</div>
-        <p>di parole prodotte in un anno: l'equivalente di 36 libri, mai scritti.</p>
-      </div>
-    </div>
-
-    <div class="equivalence">
-      <h3>Ogni 10 giorni perdi un libro intero. <em>A Meno Che Tu Non Lo Catturi.</em></h3>
-      <p>Un'ora al giorno di conversazioni non catturate vale un romanzo di 90.000 parole ogni 10 giorni: idee, decisioni e ragionamenti che nessuno potrà più rileggere. ZirkonIA<sup class="tm">™</sup> trasforma ogni conversazione in un capitolo permanente della tua intelligenza, così quello che oggi si perde in un attimo, domani lavora per te per sempre.</p>
-
-      <div class="metaphor-row">
-        <div class="m-card">
-          <div class="m-title">Una biblioteca che potresti già avere</div>
-          <p>La maggior parte dei professionisti costruisce solo una frazione di questo patrimonio in una vita intera di appunti sparsi; il resto va perso.</p>
+  <!-- 1. Pesce rosso -->
+  <section id="pg-pesce">
+    <div class="pg-inner">
+      <h2 class="rv">L’AI è un genio con la memoria di un pesce <span class="rosso">rosso!</span></h2>
+      <div class="fish-wrap rv d1">
+        <div class="fish-swim">
+          <img class="fish-static" src="img/pesce-rosso.jpg" alt="Un pesce rosso imbronciato: l’AI che dimentica tutto" width="1400" height="1173">
+          <canvas class="fish-gl" width="1400" height="1173" aria-hidden="true"></canvas>
         </div>
-        <div class="m-card">
-          <div class="m-title">Un'eredità che oggi evapora</div>
-          <p>Ogni riunione non catturata è un capitolo perso per sempre. Con ZirkonIA<sup class="tm">™</sup>, diventa un mattone permanente della tua intelligenza.</p>
+        <div class="fish-shadow" aria-hidden="true"></div>
+      </div>
+      <img class="brandmark rv d2" src="img/logo-mind-different.png" alt="ZirkonIA — Mind Different" width="890" height="280">
+    </div>
+  </section>
+
+  <!-- 2. Il problema -->
+  <section id="pg-problema">
+    <div class="pg-inner">
+      <div class="two-col">
+        <div>
+          <span class="pg-kicker rv">Il problema</span>
+          <h2 class="rv d1">Ogni giorno il tuo sapere evapora.</h2>
+          <p class="rv d2">Una decisione presa al volo in una call. Un’intuizione avuta sotto la doccia. La risposta perfetta data a un cliente. Il modo in cui hai chiuso quella trattativa impossibile.</p>
+          <p class="rv d3"><strong>È il vero patrimonio tuo e della tua azienda. E vive solo nella tua testa.</strong></p>
+        </div>
+        <img class="molecule rv d1" src="img/rete-sapere.jpg" alt="La rete del tuo sapere" width="500" height="525">
+      </div>
+    </div>
+  </section>
+
+  <!-- 2b. Lo studio -->
+  <section id="pg-studio">
+    <div class="pg-inner">
+      <span class="pg-kicker rv">Lo studio ZirkonIA</span>
+      <h2 class="rv d1"><span class="count" data-to="3.2" data-dec="1">3,2</span> milioni di parole perse ogni anno.<br>Un capitale immenso che non stai sfruttando.</h2>
+      <p class="lead rv d2">Abbiamo incrociato gli studi sulla velocità media del parlato con la giornata reale di professionisti, CEO e imprenditori. <strong>Il risultato ci ha sorpresi:</strong> in una sola ora di riunioni, call e ragionamenti ad alta voce produci circa 8.800 parole. Nessuno le scrive, nessuno le conserva. Domani te ne resterà un’impressione. Tra un anno, niente.</p>
+
+      <div class="calc">
+        <div class="calc-card rv"><span class="op">ogni giorno</span><div class="v c1">1 ora</div><p>di conversazioni strategiche al giorno. Una stima volutamente prudente.</p></div>
+        <div class="calc-card rv d1"><span class="op">× 60 minuti</span><div class="v c2">8.800 parole</div><p>circa 147 al minuto, per un’ora di parlato. Quante ne ricorderai domani?</p></div>
+        <div class="calc-card rv d2"><span class="op">× 365 giorni</span><div class="v c3">3,2 milioni</div><p>di parole in un anno di lavoro. Quasi tutte, disperse.</p></div>
+        <div class="calc-card rv d3"><span class="op">÷ 90.000 parole</span><div class="v c4">36 libri</div><p>da 90.000 parole l’uno. Mai scritti.</p></div>
+      </div>
+
+      <div class="shelf-box rv">
+        <div class="shelf-head">
+          <h3>Ogni 10 giorni perdi un libro intero. <span class="accent">A meno che tu non lo catturi.</span></h3>
+          <div class="shelf-counter"><span id="pgDay">0</span><small>giorni</small></div>
+        </div>
+        <div class="pg-shelf" id="pgShelf" aria-label="36 libri: un anno del tuo sapere"></div>
+        <div class="shelf-caption">36 libri: un anno del tuo sapere, non ancora catturato.</div>
+        <div class="shelf-cols">
+          <div><h4>Una biblioteca che potresti già avere</h4><p>La maggior parte dei professionisti costruisce solo una frazione di questo patrimonio in una vita intera di appunti sparsi. Il resto va perso.</p></div>
+          <div><h4>Un’eredità che oggi evapora</h4><p>Ogni riunione non catturata è un capitolo perso per sempre. Con ZirkonIA diventa un mattone permanente della tua intelligenza.</p></div>
+        </div>
+      </div>
+
+      <div class="payoff-box rv">
+        <p>Bastano <strong>sei mesi</strong> di apprendimento. Poi ti basterà chiedere: il tuo libro, il protocollo della tua azienda, generati da <strong>una singola richiesta</strong>. Un valore che da solo può superare i</p>
+        <div class="payoff-num">3.000–4.000 €</div>
+      </div>
+
+      <details class="method rv">
+        <summary>Come abbiamo fatto i conti</summary>
+        <p>Partiamo da un dato noto: in una conversazione si pronunciano in media tra le 130 e le 160 parole al minuto. Abbiamo preso un valore intermedio, circa 147, che in un’ora fa <strong>8.800 parole</strong>.</p>
+        <p>Poi abbiamo scelto l’ipotesi più prudente: <strong>una sola ora al giorno</strong> di parlato strategico (riunioni, call, decisioni), per 365 giorni. Il totale è di <strong>3,2 milioni di parole</strong> l’anno. Divise per 90.000, la lunghezza di un libro medio, fanno <strong>36 libri</strong>.</p>
+        <p>È una stima, non una misura. Ma chi guida un’azienda parla di lavoro ben più di un’ora al giorno: il conto reale è quasi sempre più alto.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- 3. La risposta + Come funziona -->
+  <section id="pg-risposta">
+    <div class="pg-inner">
+      <div class="two-col" style="align-items:start;">
+        <div class="lead">
+          <span class="pg-kicker rv">La risposta</span>
+          <h2 class="rv d1">ZirkonIA è il tuo secondo cervello.</h2>
+          <p class="rv d2">Raccoglie quello che dici, decidi e sai. Lo ordina. Te lo restituisce quando serve, a te o al tuo team, con la tua voce.</p>
+          <p class="rv d3"><strong>Non è un assistente generico: conosce te e la tua azienda, perché l’ha imparato da te.</strong></p>
+        </div>
+        <div class="how">
+          <h3 class="rv">Come funziona.</h3>
+          <div class="how-step rv d1"><span class="n">1</span><p><strong>Ascolta.</strong> Conversazioni, documenti, decisioni: il modo in cui parli e lavori.</p></div>
+          <div class="how-step rv d2"><span class="n">2</span><p><strong>Struttura.</strong> Tutto diventa una rete di conoscenza connessa e sempre aggiornata.</p></div>
+          <div class="how-step rv d3"><span class="n">3</span><p><strong>Pensa.</strong> Risponde, scrive e decide con la tua voce, ovunque tu ne abbia bisogno.</p></div>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="bookshelf-wrap">
-      <div class="bookshelf-caption">36 libri: <em>Un Anno Del Tuo Sapere, Non Ancora Catturato.</em></div>
-      <div class="bookshelf" id="bookshelf"></div>
-      <div class="bookshelf-payoff">Bastano sei mesi di apprendimento. Poi ti basterà chiedere: il tuo libro, il protocollo della tua azienda, generati da <em>Una Singola Richiesta</em>, con un valore che da solo può superare i <em>3.000-4.000€.</em></div>
-    </div>
-  </div>
-</section>
-
-<section id="what">
-  <div class="section-inner narrow center">
-    <p class="motto" lang="la"><span>Verba volant,</span> <em>data manent.</em></p>
-    <span class="kicker">Chi è ZirkonIA<sup class="tm">™</sup>?</span>
-    <h2 style="max-width:none;">Più di un assistente: <em>Un'Infrastruttura Di Intelligenza Multipiattaforma.</em></h2>
-    <p style="margin-top:24px;">ZirkonIA<sup class="tm">™</sup> è costruito su un'architettura di livello enterprise, pensata per scala e sicurezza. Ogni conversazione, documento e decisione viene indicizzato in un database vettoriale ad alte prestazioni, che trasforma il linguaggio naturale in conoscenza interrogabile in tempo reale. Un motore di retrieval intelligente individua solo l'informazione rilevante e la combina con modelli linguistici avanzati di ultima generazione, elaborati su infrastrutture cloud isolate per ogni cliente. Il risultato: un sistema che comprende il contesto, riconosce pattern nel tempo, e risponde con la tua voce reale.</p>
-  </div>
-</section>
-
-<section id="problem">
-  <canvas class="graph-canvas" data-mode="chaos"></canvas>
-  <div class="section-vignette"></div>
-  <div class="section-inner narrow">
-    <span class="kicker">Il potenziale nascosto</span>
-    <h2 style="max-width:none; font-size:clamp(24px,3.6vw,34px);">Ogni giorno crei più di quanto la mente possa trattenere.</h2>
-    <p style="margin-top:26px;">Una decisione presa al volo in una call. Un'intuizione avuta sotto la doccia. La risposta perfetta data a un cliente. Ogni momento genera dati preziosi (le cose che dici, che pensi, che scegli), vere opportunità che nascono e passano in un istante. <em>La Mente Umana Ne Custodisce Solo Una Parte</em>: ZirkonIA<sup class="tm">™</sup> è pensato per custodire tutto il resto.</p>
-  </div>
-</section>
-
-<section id="solution">
-  <canvas class="graph-canvas" data-mode="structured"></canvas>
-  <div class="section-vignette"></div>
-  <div class="section-inner">
-    <span class="kicker">Come funziona</span>
-    <h2>ZirkonIA<sup class="tm">™</sup> lo raccoglie. <em>E Lo Fa Pensare.</em></h2>
-    <div class="steps">
-      <div class="step">
-        <span class="num">01</span>
-        <h3>Ascolta</h3>
-        <p>Raccoglie tutto ciò che sai: conversazioni, documenti, decisioni, il modo in cui parli e lavori.</p>
-      </div>
-      <div class="step">
-        <span class="num">02</span>
-        <h3>Struttura</h3>
-        <p>Lo trasforma in una rete viva di conoscenza, connessa e sempre aggiornata.</p>
-      </div>
-      <div class="step">
-        <span class="num">03</span>
-        <h3>Pensa</h3>
-        <p>Risponde, scrive, decide con la tua voce, ovunque tu ne abbia bisogno.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="intelligence">
-  <canvas class="graph-canvas" data-mode="structured"></canvas>
-  <div class="section-vignette"></div>
-  <div class="section-inner">
-    <span class="kicker">Cosa può fare</span>
-    <h2>Mesi di lavoro. <em>Analizzati In Minuti.</em></h2>
-    <p style="margin-top:26px; max-width:640px;">Ogni nota, ogni riunione, ogni decisione presa in un anno di lavoro diventa materiale analizzabile all'istante. ZirkonIA<sup class="tm">™</sup> incrocia tutto questo e lo trasforma in output concreti (una proposta, una strategia, persino un libro) costruiti sulla tua voce e sulla tua esperienza reale, non su un prompt generico.</p>
-    <div class="value-card" style="margin-top:40px; max-width:640px;">
-      <h3>Un esempio concreto</h3>
-      <p>Vuoi scrivere un libro sulla tua esperienza professionale? ZirkonIA<sup class="tm">™</sup> parte da anni della tua storia, già pronta ad essere raccontata.</p>
-    </div>
-  </div>
-</section>
-
-<section id="brain">
+  <!-- 3a. Demo interattiva -->
+  <section id="brain">
   <div class="ambient"></div>
   <div class="section-inner narrow center" style="padding-bottom:0;">
-    <span class="kicker">Il tuo secondo cervello, in diretta</span>
-    <h2 style="max-width:none;">Ogni pensiero che gli dai <em>Diventa Parte Di Lui.</em></h2>
-    <p class="subhead">Scrivi qualcosa qui sotto (una nota, un'idea, una decisione) e guarda ZirkonIA<sup class="tm">™</sup> farla propria, in tempo reale.</p>
+    <span class="pg-kicker">Provalo adesso</span>
+    <h2>Ogni pensiero che gli dai<br>diventa <span class="hl">parte di lui.</span></h2>
+    <p class="subhead">Scrivi qui sotto una nota, un’idea o una decisione, e guarda ZirkonIA<sup class="tm">™</sup> farla propria in tempo reale.</p>
   </div>
 
   <div class="brain-wrap">
@@ -798,85 +1279,414 @@
   <div class="hint">Premi Invio: diventa parte del tuo secondo cervello.</div>
 </section>
 
-<section id="protocol">
-  <div class="section-inner">
-    <span class="kicker">La creazione del tuo brain</span>
-    <h2 style="max-width:none;">Tutto parte da un incontro e poi... <em>Cresce Con Te Nel Tempo.</em></h2>
-    <div class="protocol-grid">
-      <div class="protocol-copy">
-        <p>Prima ancora del codice, ZirkonIA<sup class="tm">™</sup> nasce da un confronto diretto con te: una sessione personale in cui costruiamo insieme le fondamenta della tua conoscenza: chi sei, come lavori, cosa conta davvero per te. È la base su cui tutto il resto si costruisce.</p>
-        <p style="margin-top:20px;">Da quel primo incontro nasce lo <strong style="color:var(--ink); font-weight:500;">ZirkonIA<sup class="tm">™</sup> Protocol</strong>: il percorso, non un semplice avvio, che ti guida a nutrire lo strumento nel tempo, riunione dopo riunione, conversazione dopo conversazione.</p>
-        <p style="margin-top:20px;">L'architettura è pronta ad imparare. Ma cresce solo se tu la nutri, anche solo parlandoci.</p>
-      </div>
-      <div class="protocol-image">
-        <img src="zirkonia-protocol.webp" alt="Packaging dello ZirkonIA Protocol" width="985" height="935" loading="lazy" decoding="async" />
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="touch">
-  <div class="section-inner">
-    <span class="kicker">Il tuo hardware</span>
-    <h2 style="max-width:none;">L'orecchio di ZirkonIA<sup class="tm">™</sup>. <em>Ovunque Tu Parli.</em></h2>
-    <div class="protocol-grid">
-      <div class="protocol-image">
-        <img src="zirkonia-touch.webp" alt="ZirkonIA Touch" width="825" height="1024" loading="lazy" decoding="async" />
-      </div>
-      <div class="protocol-copy">
-        <p><strong style="color:var(--ink); font-weight:500;">ZirkonIA<sup class="tm">™</sup> Touch</strong> è il dispositivo che porta la cattura della conoscenza fuori dallo schermo. Una card sottile, un solo tasto: premi, parla, rilascia.</p>
-        <p style="margin-top:20px;">Ogni conversazione viene trasferita in testo attraverso l'infrastruttura ZirkonIA<sup class="tm">™</sup>, e l'intelligenza artificiale la indicizza automaticamente nel database vettoriale del tuo secondo cervello, pronta per essere richiamata, connessa, utilizzata.</p>
-        <div class="touch-features">
-          <div class="touch-feature"><span class="bullet"></span><span><strong>Un tasto.</strong> Nessuna app da aprire, nessuna configurazione: premi e registra.</span></div>
-          <div class="touch-feature"><span class="bullet"></span><span><strong>Trascrizione automatica.</strong> Ogni conversazione diventa testo, in tempo reale.</span></div>
-          <div class="touch-feature"><span class="bullet"></span><span><strong>Indicizzazione istantanea.</strong> Il contenuto entra subito a far parte della tua rete di conoscenza.</span></div>
+  <!-- 3b. Personal / Company Brain -->
+  <section id="pg-brains">
+    <div class="pg-inner">
+      <span class="pg-kicker rv">Per chi è</span>
+      <h2 class="rv d1">Un brain per te.<br>Uno per la tua azienda.</h2>
+      <div class="brain-cards">
+        <div class="brain-card rv">
+          <span class="tag">Personal Brain</span>
+          <h3>Per professionisti e CEO.</h3>
+          <p>Il tuo modo di pensare, decidere e comunicare, raccolto in un unico posto. Ritrovi ogni idea, ogni decisione, ogni conversazione e la trasformi in proposte, contenuti, strategie, persino un libro: con la tua voce, non con quella di un prompt generico.</p>
+          <ul>
+            <li>Nessuna intuizione persa per strada</li>
+            <li>Contenuti e proposte già nel tuo tono</li>
+            <li>Decisioni prese con tutta la tua storia davanti</li>
+          </ul>
+        </div>
+        <div class="brain-card dark rv d1">
+          <span class="tag">Company Brain</span>
+          <h3>Per aziende e team.</h3>
+          <p>Il sapere dell’azienda smette di vivere nella testa di poche persone. Procedure, clienti, decisioni e know-how diventano un patrimonio condiviso, che tutto il team può interrogare quando serve.</p>
+          <ul>
+            <li>Onboarding più rapido, meno “chiedi a me”</li>
+            <li>Procedure sempre aggiornate e accessibili</li>
+            <li>Il know-how resta, anche quando le persone cambiano</li>
+          </ul>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="who">
-  <div class="section-inner narrow center">
-    <span class="kicker">Per chi punta in alto</span>
-    <h2>Per chi vuole superare <em>Ogni Limite!</em></h2>
-    <p>Imprenditori, professionisti e team pronti a spingere la propria conoscenza, il proprio lavoro, il proprio potenziale oltre ogni limite conosciuto.</p>
-  </div>
-</section>
+  <!-- 4. ZirkonIA Touch -->
+  <section id="pg-touch">
+    <div class="pg-inner">
+      <span class="pg-kicker rv">ZirkonIA Touch</span>
+      <h2 class="rv d1">Un tasto.<br>Nient’altro.</h2>
+      <img class="card rv d2" src="img/zirkonia-touch.jpg" alt="ZirkonIA Touch, la card con un solo tasto" width="880" height="900">
+      <p class="t-sub rv">Una card sottile da tenere in tasca.</p>
+      <div class="t-claim rv d1">Premi, parli, ricordi.</div>
+      <p class="t-body rv d2">Niente app, niente configurazione: quello che dici viene trascritto e finisce subito nel tuo secondo cervello.</p>
+      <p class="t-foot rv d3">In riunione, in macchina,<br>tra un appuntamento e l’altro.</p>
+    </div>
+  </section>
 
-<section id="value">
-  <div class="section-inner">
-    <span class="kicker">Perché investire</span>
-    <h2 style="max-width:none;">Più di uno strumento. <em>Un Patrimonio.</em></h2>
-    <div class="value-grid">
-      <div class="value-card">
-        <h3>Un asset, per sempre tuo</h3>
-        <p>Costruito una volta, lavora per sempre. Cresce con te, a un ritmo che è solo tuo.</p>
+  <!-- 5. Per te -->
+  <section id="pg-perte">
+    <div class="pg-inner">
+      <span class="pg-kicker rv">Per te</span>
+      <h2 class="rv d1">Cosa cambia.</h2>
+      <div class="change-grid">
+        <div class="rv"><h3>Deleghi davvero.</h3><p>Le tue procedure smettono di essere "chiedi a me".</p></div>
+        <div class="rv d1"><h3>Formi prima.</h3><p>Chi entra nel team trova le risposte, non deve inseguirti.</p></div>
+        <div class="rv d2"><h3>Recuperi ore.</h3><p>Proposte, contenuti, strategie: mesi di lavoro analizzati in minuti.</p></div>
+        <div class="rv d3"><h3>Costruisci un asset.</h3><p>Costruito una volta, lavora per sempre e cresce con te, anno dopo anno.</p></div>
       </div>
-      <div class="value-card">
-        <h3>ROI diretto</h3>
-        <p>Ore risparmiate su contenuti, proposte e formazione del team, con ogni output già nella tua voce.</p>
-      </div>
-      <div class="value-card">
-        <h3>Accesso selettivo</h3>
-        <p>Un numero limitato di piloti, seguiti uno a uno, con la massima cura.</p>
-      </div>
-      <div class="value-card">
-        <h3>Provato sul campo</h3>
-        <p>Nasce dal primo pilota reale: il secondo cervello di un imprenditore, già al lavoro ogni giorno.</p>
+      <div class="start-box rv">
+        <div>
+          <h3>Come si parte.</h3>
+          <p>Un incontro personale per capire chi sei, come lavori e cosa conta davvero per te. Poi lo <strong>ZirkonIA Protocol</strong>, il percorso che ti guida a nutrire il tuo brain riunione dopo riunione.</p>
+          <p><strong>Seguiamo ogni cliente uno a uno. Per questo i posti sono pochi.</strong></p>
+        </div>
+        <a class="pg-btn" href="https://wa.me/393484925505" data-wa-text="Buongiorno%2C%20vi%20sto%20contattando%20per%20una%20call%20su%20ZirkonIA.%20Vorrei%20raccontarvi%20chi%20sono%2C%20come%20lavoro%20e%20cosa%20vorrei%20dal%20mio%20secondo%20cervello." target="_blank" rel="noopener">Prenota una consulenza</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="cta-final">
-  <canvas class="graph-canvas" data-mode="converge"></canvas>
-  <div class="section-vignette"></div>
-  <div class="section-inner narrow center">
-    <h2>Il tuo secondo cervello <em>Ti Aspetta.</em></h2>
-    <a class="btn btn-primary large" style="display:inline-block;" href="https://wa.me/393484925505" data-wa-text="Buongiorno%2C%20vi%20sto%20contattando%20per%20una%20call%20su%20ZirkonIA.%20Vorrei%20raccontarvi%20chi%20sono%2C%20come%20lavoro%20e%20cosa%20vorrei%20dal%20mio%20secondo%20cervello." target="_blank" rel="noopener">Prenota una call</a>
-  </div>
-</section>
+  <!-- 5b. Il capitale -->
+  <section id="pg-capitale">
+    <div class="pg-inner">
+      <span class="pg-kicker rv">Il tuo capitale</span>
+      <h2 class="rv d1">Le tue parole<br>diventano <span class="hl">capitale.</span></h2>
+      <p class="lead rv d2">Quasi tutto in azienda perde valore con il tempo: macchinari, software, perfino le idee che non scrivi. Il sapere raccolto da ZirkonIA fa il contrario: <strong>cresce a ogni riunione, a ogni decisione, a ogni idea</strong>. E come ogni capitale, rende.</p>
+
+      <div class="cap-grid">
+        <div class="growth rv">
+          <svg viewBox="0 0 520 300" aria-label="Il valore del tuo brain cresce nel tempo">
+            <defs>
+              <linearGradient id="pgArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b8cff" stop-opacity=".35"/><stop offset="1" stop-color="#5b8cff" stop-opacity="0"/></linearGradient>
+            </defs>
+            <g stroke="rgba(255,255,255,.08)" stroke-width="1"><line x1="20" y1="250" x2="500" y2="250"/><line x1="20" y1="170" x2="500" y2="170"/><line x1="20" y1="90" x2="500" y2="90"/></g>
+            <path class="area" d="M20 248 C140 240 230 222 300 190 S430 90 500 28 L500 250 L20 250Z" fill="url(#pgArea)"/>
+            <path class="line" d="M20 248 C140 240 230 222 300 190 S430 90 500 28" fill="none" stroke="#8fb4ff" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M20 249 L500 238" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="2" stroke-dasharray="5 7"/>
+            <g class="pts">
+              <circle cx="150" cy="238" r="7"/><circle cx="300" cy="190" r="7"/><circle cx="500" cy="28" r="8"/>
+            </g>
+            <g class="lbl" font-family="Montserrat, sans-serif" font-size="13" font-weight="700">
+              <text x="150" y="222" text-anchor="middle">3 mesi</text>
+              <text x="300" y="172" text-anchor="middle">1 anno</text>
+              <text x="488" y="58" text-anchor="end">nel tempo</text>
+              <text x="40" y="276" fill="rgba(255,255,255,.45)" font-weight="600" font-size="11.5">il sapere che non catturi: resta fermo, poi evapora</text>
+            </g>
+          </svg>
+        </div>
+        <div class="cap-steps">
+          <div class="cap-step rv d1"><span class="when">Dopo 3 mesi</span><p>Un manuale operativo scritto con le tue parole. Decisioni di cui si conosce sempre il perché.</p></div>
+          <div class="cap-step rv d2"><span class="when">Dopo 1 anno</span><p>La base per nuovi progetti: una seconda sede, la formazione del team, contenuti nella tua voce, perfino un libro.</p></div>
+          <div class="cap-step rv d3"><span class="when">Nel tempo</span><p>Un’eredità. E lo strumento per affrontare il passaggio generazionale senza ricominciare da zero.</p></div>
+        </div>
+      </div>
+
+      <div class="twice">
+        <h3 class="rv">Un capitale che rende due volte.</h3>
+        <div class="twice-grid">
+          <div class="rv d1"><span class="n">01</span><h4>Ti restituisce tempo.</h4><p>Le ore oggi spese a cercare informazioni, rispiegare procedure, ricostruire ragionamenti già fatti.</p></div>
+          <div class="rv d2"><span class="n">02</span><h4>Crea ciò che non avresti mai il tempo di creare.</h4><p>Metodi, manuali, proposte, strategie: costruiti sulla tua esperienza reale, non su un prompt generico.</p></div>
+        </div>
+      </div>
+
+      <div class="intel rv">
+        <span class="pg-kicker">Intelligence aziendale</span>
+        <h3>Dai dati alle decisioni.</h3>
+        <p>Molte aziende costruiscono la strategia su convinzioni e intuizioni, e raramente la mettono alla prova del mercato. Quando il sapere è raccolto, collegato e coerente, smette di essere memoria e diventa <strong>intelligence</strong>: incroci quello che sai con quello che accade fuori, e validi un’idea prima di investirci.</p>
+        <div class="intel-pillars">
+          <div><span class="dot"></span><h4>Memoria</h4><p>Niente si perde: ogni riunione, ogni scelta, ogni idea.</p></div>
+          <div><span class="dot"></span><h4>Coerenza</h4><p>Ogni decisione con il suo perché, sempre ritrovabile.</p></div>
+          <div><span class="dot"></span><h4>Visione</h4><p>Strategie costruite sui dati, non sulle sensazioni.</p></div>
+        </div>
+      </div>
+
+      <div class="proof rv">
+        <span class="pg-kicker">Provato sul campo</span>
+        <p class="q">Il primo brain ZirkonIA è quello del suo fondatore: al lavoro ogni giorno da mesi, per gestire più società e progetti.</p>
+        <p>In una trattativa societaria delicata ha permesso di preparare in poche ore una contro-proposta solida, con precedenti e impegni già a disposizione, senza attendere una consulenza esterna.</p>
+      </div>
+
+      <div class="cap-final rv">
+        <p class="vs"><span>Un consulente vende ore, che finiscono.</span><span>Un software vende funzioni, che si copiano.</span></p>
+        <p class="big">ZirkonIA costruisce un patrimonio <span class="hl">che è solo tuo.</span></p>
+        <p class="own">I dati restano tuoi: account a tuo nome, archivio in un formato aperto e portabile.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Chiusura -->
+  <section id="pg-chiusura">
+    <div class="pg-inner">
+      <h2 class="rv">Il tuo secondo cervello ti aspetta.</h2>
+      <p class="lead rv d1">Personal Brain o Company Brain: tutto parte da un incontro, da chi sei e da come lavori.</p>
+      <a class="pg-btn rv d2" href="https://wa.me/393484925505" data-wa-text="Buongiorno%2C%20vi%20sto%20contattando%20per%20una%20call%20su%20ZirkonIA.%20Vorrei%20raccontarvi%20chi%20sono%2C%20come%20lavoro%20e%20cosa%20vorrei%20dal%20mio%20secondo%20cervello." target="_blank" rel="noopener">Prenota una consulenza</a>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* reveal + contatore del blocco pieghevole */
+(function(){
+  var els = document.querySelectorAll('.pg .rv');
+  var count = function(el){
+    var to = parseFloat(el.dataset.to), dec = +el.dataset.dec || 0, t0 = null;
+    var step = function(ts){
+      if(!t0) t0 = ts;
+      var k = Math.min(1, (ts - t0) / 1400), e = 1 - Math.pow(1 - k, 3);
+      el.textContent = (to * e).toFixed(dec).replace('.', ',');
+      if(k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  if(!('IntersectionObserver' in window)){ els.forEach(function(e){ e.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting) return;
+      en.target.classList.add('in');
+      var c = en.target.querySelector('.count');
+      if(c && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) count(c);
+      io.unobserve(en.target);
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(function(e){ io.observe(e); });
+})();
+
+/* pesce: coda e pinne animate (onda che corre dalla base alla punta) */
+(function(){
+  var cv = document.querySelector('#pg-pesce .fish-gl'), im = document.querySelector('#pg-pesce .fish-static');
+  if(!cv || !im) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var gl = cv.getContext('webgl', { premultipliedAlpha:false, antialias:false });
+  if(!gl) return;
+  var VS = 'attribute vec2 a;varying vec2 v;void main(){v=vec2(a.x*.5+.5,.5-a.y*.5);gl_Position=vec4(a,0.,1.);}';
+  var FS = [
+    'precision highp float;',
+    'uniform sampler2D img;uniform float t;varying vec2 v;',
+    'const vec2 S=vec2(1400.,1173.);',
+    'vec2 rot(vec2 r,float a){float c=cos(a),s=sin(a);return vec2(c*r.x-s*r.y,s*r.x+c*r.y);}',
+    /* P base, d direzione verso la punta, L lunghezza, W mezza larghezza,
+       A piega (rad), B increspatura (px), f frequenza (Hz), ph fase, k onde lungo la pinna, sw oscillazione laterale */
+    'vec2 fin(vec2 p,vec2 P,vec2 d,float L,float W,float A,float B,float f,float ph,float k,float sw){',
+    '  d=normalize(d);vec2 n=vec2(-d.y,d.x);vec2 r=p-P;float u=dot(r,d)/L;float q=dot(r,n);',
+    '  float w=smoothstep(-.02,.22,u)*(1.-smoothstep(.45,1.,abs(q)/W))*(1.-smoothstep(1.05,1.35,u));',
+    '  if(w<=0.)return vec2(0.);',
+    '  float uu=max(u,0.);float ph2=6.2831853*f*t+ph;',
+    '  float bend=A*pow(uu,1.5)*sin(ph2-k*uu);',            /* onda che viaggia verso la punta */
+    '  vec2 r2=rot(r,-bend);',
+    '  float a2=dot(r2,d)*(1.+sw*uu*sin(ph2-k*uu-1.2));',     /* la coda si apre e si chiude */
+    '  r2=d*a2+n*dot(r2,n);',
+    '  r2+=n*B*uu*uu*sin(ph2*1.6-k*1.8*uu+q*.012);',         /* bordi morbidi che seguono in ritardo */
+    '  return (P+r2-p)*w;',
+    '}',
+    'void main(){',
+    '  vec2 p=v*S;vec2 o=vec2(0.);',
+    '  o+=fin(p,vec2(525.,510.),vec2(-1.,.05),540.,700.,.05,7.,.55,0.,3.,.045);',   /* coda */
+    '  o+=fin(p,vec2(790.,335.),vec2(-.30,-.95),330.,320.,.045,4.,.42,1.3,2.6,.02);',  /* dorsale */
+    '  o+=fin(p,vec2(880.,750.),vec2(-.72,.70),500.,240.,.035,5.,.7,.0,2.2,.03);',    /* pettorale grande */
+    '  o+=fin(p,vec2(640.,640.),vec2(-.37,.93),270.,130.,.05,3.,.7,2.1,2.,.03);',    /* anale */
+    '  o+=fin(p,vec2(1040.,840.),vec2(.37,.93),300.,150.,.05,4.,.7,3.3,2.2,.03);',   /* ventrale destra */
+    '  vec2 uv=(p+o)/S;',
+    '  vec4 c=texture2D(img,clamp(uv,0.,1.));',
+    '  float out_=step(1.,max(max(-uv.x,uv.x-1.),max(-uv.y,uv.y-1.))+1.);',
+    '  gl_FragColor=mix(c,vec4(1.),out_);',
+    '}'
+  ].join('\n');
+  function sh(type, src){ var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+    if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)){ console.warn(gl.getShaderInfoLog(s)); return null; } return s; }
+  var vs = sh(gl.VERTEX_SHADER, VS), fs = sh(gl.FRAGMENT_SHADER, FS);
+  if(!vs || !fs) return;
+  var pr = gl.createProgram(); gl.attachShader(pr, vs); gl.attachShader(pr, fs); gl.linkProgram(pr);
+  if(!gl.getProgramParameter(pr, gl.LINK_STATUS)) return;
+  gl.useProgram(pr);
+  var buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  var loc = gl.getAttribLocation(pr, 'a'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  var uT = gl.getUniformLocation(pr, 't');
+  var running = false, visible = true, t0 = performance.now();
+  function frame(now){
+    if(!visible){ running = false; return; }
+    gl.uniform1f(uT, (now - t0) / 1000);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(frame);
+  }
+  function start(){ if(!running){ running = true; requestAnimationFrame(frame); } }
+  function init(){
+    var tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
+    try{ gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, im); }catch(e){ return; }
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.viewport(0, 0, cv.width, cv.height);
+    cv.parentNode.classList.add('gl-on');
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){ visible = es[0].isIntersecting; if(visible) start(); }).observe(cv);
+    }
+    start();
+  }
+  if(im.complete && im.naturalWidth) init(); else im.addEventListener('load', init);
+})();
+
+/* scaffale dei 36 libri: copertine generate a caso a ogni visita */
+(function(){
+  var shelf = document.getElementById('pgShelf'), day = document.getElementById('pgDay');
+  if(!shelf) return;
+
+  /* generatore pseudo-casuale */
+  var seed = (Date.now() ^ 0x9e3779b9) >>> 0;
+  function rnd(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }
+  function pick(a){ return a[Math.floor(rnd() * a.length)]; }
+  function rr(a, b){ return a + rnd() * (b - a); }
+  function shuffle(a){ a = a.slice(); for(var i = a.length - 1; i > 0; i--){ var j = Math.floor(rnd() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function lum(h){ var n = parseInt(h.slice(1), 16), r = (n >> 16) / 255, g = (n >> 8 & 255) / 255, b = (n & 255) / 255; return .2126*r + .7152*g + .0722*b; }
+
+  var K = { cream:'#f3ead8', paper:'#faf5ea', ink:'#151515', mustard:'#f2c230', red:'#e8452c', tomato:'#f2603d', teal:'#1f8a8a',
+            navy:'#1d2b53', blue:'#2f6fd6', sky:'#7cc0ec', pink:'#f4a6b5', rose:'#e86f8e', sage:'#8fb996', green:'#2e9e5b',
+            orange:'#f28c28', purple:'#6d4fa3', lilac:'#b9a3e3', gold:'#d4a72c', brown:'#8a5a3c', sand:'#d8b98a', forest:'#1f3d2f', plum:'#3a1f3d' };
+
+  var PAL = [
+    [K.sky, K.ink, K.red, K.cream], [K.mustard, K.ink, K.red, K.blue], [K.ink, K.red, K.sky, K.cream],
+    [K.sand, K.ink, K.green, K.paper], [K.purple, K.orange, K.green, K.cream], [K.green, K.paper, K.red, K.ink],
+    [K.tomato, K.ink, K.sky, K.paper], [K.navy, K.mustard, K.rose, K.cream], [K.teal, K.cream, K.orange, K.ink],
+    [K.pink, K.navy, K.red, K.paper], [K.forest, K.gold, K.sand, K.cream], [K.plum, K.rose, K.mustard, K.cream],
+    [K.cream, K.blue, K.red, K.ink], [K.lilac, K.navy, K.mustard, K.paper]
+  ];
+
+  var TITLES = shuffle([
+    'Il metodo', 'Decisioni|al volo', 'La trattativa', 'Clienti|che restano', 'Il perché|delle cose', 'Errori|utili',
+    'Visione', 'Il mio team', 'Lezioni|di un anno', 'Strategie', 'Idee|in macchina', 'Cose che|so solo io',
+    'Il prezzo|giusto', 'Come|vendo', 'Riunioni', 'Il socio', 'Fornitori', 'Intuizioni', 'La crisi|di marzo',
+    'Leadership', 'Il primo|cliente', 'Delegare', 'I numeri', 'Storie|di bottega', 'Il mercato', 'Telefonate',
+    'Promesse', 'Il piano B', 'Ricette|aziendali', 'Talenti', 'La rete', 'Ascoltare', 'Il valore', 'Ripartire',
+    'Mentori', 'Domani'
+  ]);
+
+  var uid = 0;
+  function grad(stops, vertical){
+    var id = 'pgG' + (uid++);
+    var s = stops.map(function(c, i){ return '<stop offset="' + (i / (stops.length - 1)) + '" stop-color="' + c + '"/>'; }).join('');
+    return { id:id, def:'<linearGradient id="' + id + '" x1="0" y1="0" x2="' + (vertical ? 0 : 1) + '" y2="' + (vertical ? 1 : .6) + '">' + s + '</linearGradient>' };
+  }
+  function eye(cx, cy, w, white, iris, pupil){
+    var h = w * .42;
+    return '<path d="M' + (cx - w/2) + ' ' + cy + ' Q' + cx + ' ' + (cy - h) + ' ' + (cx + w/2) + ' ' + cy + ' Q' + cx + ' ' + (cy + h) + ' ' + (cx - w/2) + ' ' + cy + 'Z" fill="' + white + '"/>' +
+           '<circle cx="' + cx + '" cy="' + cy + '" r="' + (w * .19) + '" fill="' + iris + '"/>' +
+           '<circle cx="' + cx + '" cy="' + cy + '" r="' + (w * .085) + '" fill="' + pupil + '"/>' +
+           '<circle cx="' + (cx + w * .05) + '" cy="' + (cy - w * .05) + '" r="' + (w * .03) + '" fill="#fff" fill-opacity=".85"/>';
+  }
+
+  /* stili: ognuno disegna il fondo e il motivo, e restituisce il colore di base per il testo */
+  var STYLES = {
+    eye: function(p){ var big = rnd() < .5, s = '<rect width="100" height="150" fill="' + p[0] + '"/>';
+      if(big) s += eye(50, 78, 62, K.paper, p[2], p[1]);
+      else for(var k = 0; k < 3; k++) s += eye(50, 58 + k * 22, 34, K.paper, [p[2], K.blue, (p[1] === K.paper ? K.red : p[1])][k], K.ink);
+      return { svg:s, base:p[0] }; },
+    castle: function(p){ var s = '<rect width="100" height="150" fill="' + p[0] + '"/>' +
+        '<path d="M50 74 L92 150 L8 150Z" fill="' + p[3] + '"/>' +
+        '<g fill="' + p[3] + '">' + [10,26,42,58,74].map(function(x){ return '<rect x="' + x + '" y="0" width="8" height="10"/>'; }).join('') + '</g>' +
+        eye(50, 62, 26, K.paper, p[2], K.ink);
+      return { svg:s, base:p[0] }; },
+    sunset: function(p){ var g = grad([p[2], p[0], p[1]], true), sx = rr(32, 68), s = '';
+      s += '<rect width="100" height="150" fill="url(#' + g.id + ')"/>';
+      s += '<circle cx="' + sx + '" cy="74" r="' + rr(11, 16) + '" fill="' + K.paper + '" fill-opacity=".9"/>';
+      s += '<path d="M0 100 Q25 ' + rr(80, 92) + ' 50 100 T100 ' + rr(92, 102) + ' V150 H0Z" fill="' + p[1] + '" fill-opacity=".75"/>';
+      s += '<path d="M0 118 Q30 ' + rr(100, 112) + ' 60 118 T100 116 V150 H0Z" fill="' + K.ink + '" fill-opacity=".55"/>';
+      return { svg:s, base:p[2], defs:g.def }; },
+    diamond: function(p){ var s = '<rect width="100" height="150" fill="' + K.ink + '"/>', cols = [p[2], p[0], p[3], p[1]];
+      [62, 46, 31, 17].forEach(function(d, k){ s += '<rect x="' + (50 - d/2) + '" y="' + (78 - d/2) + '" width="' + d + '" height="' + d + '" fill="' + cols[k] + '" transform="rotate(45 50 78)"/>'; });
+      return { svg:s, base:K.ink }; },
+    dots: function(p){ var s = '<rect width="100" height="150" fill="' + p[0] + '"/>', cols = [p[1], p[2], K.blue, K.green, K.paper];
+      for(var k = 0; k < 13; k++){ var x = rr(12, 88), y = rr(42, 122), r = rr(2.5, 7.5), c = pick(cols);
+        s += rnd() < .3 ? '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="none" stroke="' + c + '" stroke-width="1.8"/>' : '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="' + c + '"/>'; }
+      return { svg:s, base:p[0] }; },
+    wash: function(p){ var g = grad([pick([K.sky, K.lilac, K.pink]), pick([K.mustard, K.sage, K.rose]), pick([K.blue, K.purple, K.teal])], rnd() < .5), s = '';
+      s += '<rect width="100" height="150" fill="url(#' + g.id + ')"/>';
+      s += '<ellipse cx="' + rr(20, 80) + '" cy="' + rr(50, 110) + '" rx="' + rr(25, 40) + '" ry="' + rr(14, 24) + '" fill="#fff" fill-opacity=".22"/>';
+      s += '<ellipse cx="' + rr(20, 80) + '" cy="' + rr(60, 120) + '" rx="' + rr(20, 34) + '" ry="' + rr(10, 20) + '" fill="' + K.ink + '" fill-opacity=".08"/>';
+      return { svg:s, base:'#333333', light:true, defs:g.def }; },
+    emblem: function(p){ var bg = pick([K.forest, K.plum, K.navy, '#2a2118']), g = grad([bg, K.ink], true), s = '';
+      s += '<rect width="100" height="150" fill="url(#' + g.id + ')"/>';
+      s += '<circle cx="50" cy="76" r="21" fill="none" stroke="' + K.gold + '" stroke-width="1.6"/>';
+      s += '<circle cx="50" cy="76" r="17" fill="none" stroke="' + K.gold + '" stroke-width=".6"/>';
+      s += '<path d="M28 98 Q22 84 28 70 M72 98 Q78 84 72 70" fill="none" stroke="' + K.gold + '" stroke-width="1.1"/>';
+      return { svg:s, base:bg, monogram:true, defs:g.def }; },
+    mountain: function(p){ var g = grad([pick([K.sky, '#f5c98a', K.pink]), K.paper], true), s = '', px = rr(40, 60);
+      s += '<rect width="100" height="150" fill="url(#' + g.id + ')"/>';
+      s += '<circle cx="' + rr(20, 80) + '" cy="52" r="8" fill="' + K.orange + '" fill-opacity=".85"/>';
+      s += '<path d="M0 112 L' + px + ' 56 L100 112Z" fill="' + pick([K.navy, K.teal, K.brown]) + '"/>';
+      s += '<path d="M' + (px - 9) + ' 66 L' + px + ' 56 L' + (px + 9) + ' 66 L' + (px + 3) + ' 63 L' + (px - 2) + ' 68Z" fill="#fff"/>';
+      s += '<rect y="110" width="100" height="40" fill="' + pick([K.mustard, K.sand, K.sage]) + '"/>';
+      return { svg:s, base:'#cccccc', light:true, defs:g.def }; },
+    stripes: function(p){ var s = '<rect width="100" height="150" fill="' + K.paper + '"/>', c = p[1] === K.paper ? K.ink : p[1];
+      for(var y = 40; y < 125; y += 8) s += '<rect x="0" y="' + y + '" width="100" height="4" fill="' + c + '"/>';
+      s += '<circle cx="50" cy="82" r="20" fill="' + p[2] + '"/><circle cx="50" cy="82" r="8" fill="' + K.paper + '"/>';
+      return { svg:s, base:K.paper }; },
+    keyhole: function(p){ var s = '<rect width="100" height="150" fill="' + p[0] + '"/>';
+      s += '<circle cx="50" cy="76" r="25" fill="' + p[3] + '"/>';
+      s += '<circle cx="50" cy="70" r="7" fill="' + p[1] + '"/><path d="M45 72 L55 72 L58 92 L42 92Z" fill="' + p[1] + '"/>';
+      return { svg:s, base:p[0] }; },
+    waves: function(p){ var s = '<rect width="100" height="150" fill="' + p[0] + '"/>', cols = [p[1], p[2], p[3]];
+      for(var k = 0; k < 7; k++){ var y = 50 + k * 10; s += '<path d="M-5 ' + y + ' Q8 ' + (y - 7) + ' 20 ' + y + ' T45 ' + y + ' T70 ' + y + ' T95 ' + y + ' T120 ' + y + '" fill="none" stroke="' + cols[k % 3] + '" stroke-width="3" stroke-linecap="round"/>'; }
+      return { svg:s, base:p[0] }; },
+    arch: function(p){ var g = grad([p[2], p[0]], true), s = '<rect width="100" height="150" fill="' + p[3] + '"/>';
+      s += '<path d="M24 122 V70 A26 26 0 0 1 76 70 V122Z" fill="url(#' + g.id + ')"/>';
+      s += '<circle cx="50" cy="66" r="8" fill="' + K.paper + '" fill-opacity=".9"/>';
+      s += '<rect x="20" y="122" width="60" height="3" fill="' + p[1] + '"/>';
+      return { svg:s, base:p[3], defs:g.def }; }
+  };
+  var NAMES = Object.keys(STYLES), order = [];
+  while(order.length < 36) order = order.concat(shuffle(NAMES));
+
+  function cover(i){
+    var p = pick(PAL), st = STYLES[order[i]](p), base = st.base;
+    var dark = st.light ? false : lum(base) < .5;
+    var tc = st.monogram ? K.gold : (dark ? K.paper : K.ink);
+    var serif = rnd() < .55;
+    var lines = TITLES[i].split('|');
+    var fs = serif ? 11 : 9.2, y0 = 20, txt = '';
+    lines.forEach(function(l, k){
+      txt += '<text x="50" y="' + (y0 + k * (fs + 1.5)) + '" text-anchor="middle" fill="' + tc + '" font-size="' + fs + '" ' +
+        (serif ? 'font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="500"' : 'font-family="Montserrat, sans-serif" font-weight="800" letter-spacing="-.2"') + '>' +
+        (serif ? l : l.toUpperCase()) + '</text>';
+    });
+    if(st.monogram) txt += '<text x="50" y="83" text-anchor="middle" fill="' + K.gold + '" font-size="20" font-family="Fraunces, Georgia, serif" font-weight="500">' + lines[0].replace(/^(Il|La|I|Le|Lo|Come|Cose) /, '').charAt(0) + '</text>';
+    var d1 = i * 10 + 1, d2 = i * 10 + 10;
+    txt += '<text x="50" y="141" text-anchor="middle" fill="' + tc + '" fill-opacity=".8" font-size="5.2" font-family="Montserrat, sans-serif" font-weight="700" letter-spacing=".9">GIORNI ' + d1 + '–' + d2 + '</text>';
+    return '<svg viewBox="0 0 100 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs>' + (st.defs || '') + '</defs>' + st.svg + txt + '</svg>';
+  }
+
+  var frag = document.createDocumentFragment();
+  for(var i = 0; i < 36; i++){
+    var b = document.createElement('div');
+    b.className = 'pg-book';
+    b.style.transitionDelay = (i * 55) + 'ms';
+    b.style.setProperty('--tilt', (rr(-1.6, 1.6)).toFixed(2) + 'deg');
+    b.title = TITLES[i].replace('|', ' ') + ' — giorni ' + (i * 10 + 1) + '–' + (i * 10 + 10);
+    b.innerHTML = cover(i);
+    frag.appendChild(b);
+  }
+  shelf.appendChild(frag);
+
+  var started = false;
+  var run = function(){
+    if(started) return; started = true;
+    shelf.classList.add('on');
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ day.textContent = '365'; return; }
+    var t0 = null, dur = 36 * 55 + 500;
+    var step = function(ts){
+      if(!t0) t0 = ts;
+      var k = Math.min(1, (ts - t0) / dur);
+      day.textContent = Math.round(365 * k);
+      if(k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  if(!('IntersectionObserver' in window)){ run(); return; }
+  var io = new IntersectionObserver(function(es){ if(es[0].isIntersecting){ run(); io.disconnect(); } }, { threshold: 0.25 });
+  io.observe(shelf);
+})();
+</script>
+
 
 <footer>
   <a class="footer-brand" href="https://communikey-experience.it" target="_blank" rel="noopener">
