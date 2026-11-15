@@ -6,12 +6,19 @@
   /* URL della Web App di Apps Script (Deploy → Web app). Finché è vuoto non si invia nulla. */
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycbzniLWhuM-ki0hFU56EI53Zt3Xh0wuO7xdOm9n2SEBuJ13fV4ZqY8YkiqI3u1w7B4WO/exec';
 
-  /* Pagina di prenotazione della consulenza. PROVVISORIO: WhatsApp dello stesso numero del sito,
-     da sostituire con il link definitivo (checklist: «Definire BOOKING_URL»). */
-  var BOOKING_URL = 'https://wa.me/393484925505?text=' + encodeURIComponent(
-    'Buongiorno, ho fatto lo ZirkonIA Score a Codice Iknosys e vorrei prenotare la consulenza gratuita.');
+  /* Prenotazione della consulenza: WhatsApp con un messaggio precompilato
+     che riporta chi scrive, il livello (archetipo) e il punteggio. */
+  var WHATSAPP = 'https://wa.me/393484925505';
+  function bookingUrl(res, nome, azienda) {
+    var chi = nome ? 'sono ' + nome + (azienda ? ' di ' + azienda : '') + '. ' : '';
+    var livello = /^Livello/.test(res.archetype.name) ? 'sono a ' + res.archetype.name : 'il mio livello è ' + res.archetype.name;
+    var testo = 'Buongiorno, ' + chi + 'Ho fatto lo ZirkonIA Score: ' + livello +
+      ', con ' + res.score + ' punti su 100 e un potenziale di ' + res.potential +
+      '. Vorrei prenotare la consulenza gratuita one-to-one.';
+    return WHATSAPP + '?text=' + encodeURIComponent(testo);
+  }
 
-  var SENT_KEY = 'zkScoreSent';
+  var sent = false; /* un solo invio per pagina; i doppi invii tra pagine li blocca lo script */
   var D = ZK_DATA;
   var N = D.questions.length;
   var answers = new Array(N);  /* punti 0-3 di ogni risposta */
@@ -144,20 +151,13 @@
     return errs;
   }
 
-  function alreadySent(email) {
-    try { return localStorage.getItem(SENT_KEY) === email.toLowerCase(); } catch (e) { return false; }
-  }
-  function markSent(email) {
-    try { localStorage.setItem(SENT_KEY, email.toLowerCase()); } catch (e) { /* memoria non disponibile: si va avanti */ }
-  }
-
   function send(payload) {
     if (!ENDPOINT) { if (window.console) console.warn('ZirkonIA Score: ENDPOINT non impostato, invio saltato.'); return; }
-    if (alreadySent(payload.email)) return;
-    markSent(payload.email);
+    if (sent) return;
+    sent = true;
     try {
       fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload) })
-        .catch(function () { try { localStorage.removeItem(SENT_KEY); } catch (e) {} });
+        .catch(function () { sent = false; });
     } catch (e) { /* rete assente: il risultato si mostra comunque */ }
   }
 
@@ -196,7 +196,7 @@
         ts: new Date().toISOString()
       });
     }
-    showResult(res, clean(form.nome.value), clean(form.email.value));
+    showResult(res, clean(form.nome.value), clean(form.email.value), clean(form.azienda.value));
     btn.disabled = false;
   }
 
@@ -230,7 +230,7 @@
     box.appendChild(last);
   }
 
-  function showResult(res, nome, email) {
+  function showResult(res, nome, email, azienda) {
     var first = (nome || '').split(' ')[0];
     var a = /^Livello/.test(res.archetype.name) ? 'sei a' : 'sei un';
     $('resHello').textContent = first ? first + ', ' + a : a.charAt(0).toUpperCase() + a.slice(1);
@@ -245,7 +245,7 @@
     renderHints(res);
     $('mailText').textContent = 'Ti abbiamo inviato il report completo a ' + email + '.';
     $('mailTest').hidden = !!ENDPOINT;
-    $('bookBtn').href = BOOKING_URL;
+    $('bookBtn').href = bookingUrl(res, nome, azienda);
 
     var now = $('barNow'), gap = $('barGap'), mkNow = $('mkNow'), mkPot = $('mkPot');
     now.style.width = '0'; gap.style.left = '0'; gap.style.width = '0'; mkNow.style.left = '0'; mkPot.style.left = '0';
