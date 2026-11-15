@@ -51,13 +51,16 @@
       "inLanguage": "it-IT",
       "isPartOf": { "@id": "https://zirkonia.ai/#website" },
       "about": { "@id": "https://zirkonia.ai/#service" },
-      "primaryImageOfPage": "https://zirkonia.ai/og-image.png"
+      "primaryImageOfPage": "https://zirkonia.ai/og-image.png",
+      "dateModified": "2026-11-15",
+      "significantLink": "https://zirkonia.ai/quiz/"
     },
     {
       "@type": "Service",
       "@id": "https://zirkonia.ai/#service",
       "name": "ZirkonIA",
       "serviceType": "Secondo cervello basato su intelligenza artificiale",
+      "alternateName": ["ZirkonIA Personal Brain", "ZirkonIA Company Brain"],
       "description": "Il sapere di una vita, trasformato in intelligenza che lavora sempre al tuo fianco, ovunque tu sia.",
       "audience": { "@type": "BusinessAudience", "audienceType": "Imprenditori, professionisti e team" },
       "areaServed": { "@type": "Country", "name": "Italia" },
@@ -71,6 +74,7 @@
       "name": "Com & Key Experience",
       "legalName": "CristianoGMusa di Giuseppe Musa",
       "url": "https://communikey-experience.it/",
+      "logo": "https://zirkonia.ai/com-key-logo.webp",
       "vatID": "IT03643440922",
       "address": {
         "@type": "PostalAddress",
@@ -179,7 +183,7 @@
     padding: 18px 32px;
     display:flex; align-items:center; justify-content:space-between;
   }
-  .nav-logo{
+  .nav-logo{ text-decoration:none;
     font-family:'Space Grotesk', sans-serif;
     font-weight: 700;
     font-size: 19px;
@@ -1141,16 +1145,17 @@
 
 <header class="nav">
   <div class="nav-inner">
-    <div class="nav-logo">Zirkon<span class="ia">IA</span><sup class="tm">™</sup></div>
+    <a class="nav-logo" href="#hero" aria-label="ZirkonIA, torna all'inizio">Zirkon<span class="ia">IA</span><sup class="tm">™</sup></a>
     <a class="nav-cta" href="quiz/">Fai il quiz</a>
   </div>
 </header>
 
+<main id="contenuto">
 <section class="hero" id="hero">
   <canvas class="graph-canvas" id="heroGraph"></canvas>
   <div class="hero-inner">
     <div class="eyebrow">Com &amp; Key Experience</div>
-    <h1 class="wordmark-wrap"><span class="sr-only">ZirkonIA</span><canvas id="wordmarkCanvas" aria-hidden="true"></canvas></h1>
+    <h1 class="wordmark-wrap"><span class="sr-only">ZirkonIA, il secondo cervello per imprenditori e professionisti</span><canvas id="wordmarkCanvas" aria-hidden="true"></canvas></h1>
     <div class="payoff">Your <span class="limitless-glow">Limitless</span> brain.</div>
     <p class="hero-sub">Il sapere di una vita, trasformato in intelligenza che lavora sempre al tuo fianco, ovunque tu sia.</p>
     <div class="cta-row">
@@ -1172,12 +1177,12 @@
       <h2 class="rv">L’AI è un genio con la memoria di un pesce <span class="rosso">rosso!</span></h2>
       <div class="fish-wrap rv d1">
         <div class="fish-swim">
-          <img class="fish-static" src="img/pesce-rosso.jpg" alt="Un pesce rosso imbronciato: l’AI che dimentica tutto" width="1400" height="1173">
+          <img class="fish-static" src="img/pesce-rosso.webp" loading="lazy" decoding="async" alt="Un pesce rosso imbronciato: l’AI che dimentica tutto" width="1400" height="1173">
           <canvas class="fish-gl" width="1400" height="1173" aria-hidden="true"></canvas>
         </div>
         <div class="fish-shadow" aria-hidden="true"></div>
       </div>
-      <img class="brandmark rv d2" src="img/logo-mind-different.png" alt="ZirkonIA — Mind Different" width="890" height="280">
+      <img class="brandmark rv d2" src="img/logo-mind-different.webp" loading="lazy" decoding="async" alt="ZirkonIA — Mind Different" width="890" height="280">
     </div>
   </section>
 
@@ -1191,7 +1196,7 @@
           <p class="rv d2">Una decisione presa al volo in una call. Un’intuizione avuta sotto la doccia. La risposta perfetta data a un cliente. Il modo in cui hai chiuso quella trattativa impossibile.</p>
           <p class="rv d3"><strong>È il vero patrimonio tuo e della tua azienda. E vive solo nella tua testa.</strong></p>
         </div>
-        <img class="molecule rv d1" src="img/rete-sapere.jpg" alt="La rete del tuo sapere" width="500" height="525">
+        <img class="molecule rv d1" src="img/rete-sapere.webp" loading="lazy" decoding="async" alt="La rete del tuo sapere: conversazioni, documenti e decisioni collegati nel secondo cervello ZirkonIA" width="495" height="520">
       </div>
     </div>
   </section>
@@ -1314,7 +1319,7 @@
     <div class="pg-inner">
       <span class="pg-kicker rv">ZirkonIA Touch</span>
       <h2 class="rv d1">Un tasto.<br>Nient’altro.</h2>
-      <img class="card rv d2" src="img/zirkonia-touch.jpg" alt="ZirkonIA Touch, la card con un solo tasto" width="880" height="900">
+      <img class="card rv d2" src="img/zirkonia-touch.webp" loading="lazy" decoding="async" alt="ZirkonIA Touch, la card con un solo tasto per registrare e catturare le tue conversazioni" width="879" height="900">
       <p class="t-sub rv">Una card sottile da tenere in tasca.</p>
       <div class="t-claim rv d1">Premi, parli, ricordi.</div>
       <p class="t-body rv d2">Niente app, niente configurazione: quello che dici viene trascritto e finisce subito nel tuo secondo cervello.</p>
@@ -1422,6 +1427,7 @@
   </section>
 
 </div>
+</main>
 
 <script>
 /* reveal + contatore del blocco pieghevole */
@@ -1691,13 +1697,13 @@
 <footer>
   <a class="footer-brand" href="https://communikey-experience.it" target="_blank" rel="noopener">
     <span>ZirkonIA<sup class="tm">™</sup> è un prodotto di</span>
-    <img src="com-key-logo.webp" width="485" height="150" alt="Com &amp; Key Experience">
+    <img src="com-key-logo.webp" loading="lazy" decoding="async" width="485" height="150" alt="Com &amp; Key Experience">
   </a>
   <div class="footer-legal"><button type="button" class="lgl-link" data-lgl-open="lgl-privacy">Privacy</button> · <button type="button" class="lgl-link" data-lgl-open="lgl-cookie">Cookie</button></div>
 </footer>
 
 <!-- PRIVACY E COOKIE (bozza da far verificare a un professionista; testo allineato alla nota del brain «ZirkonIA - Informativa Privacy e Cookie della Landing (bozza)», ricavata da quella di Com & Key) -->
-<div class="lgl-overlay" id="lgl-privacy" hidden>
+<div class="lgl-overlay" id="lgl-privacy" hidden data-nosnippet>
 <div class="lgl-dialog" role="dialog" aria-modal="true" aria-labelledby="lgl-privacy-t">
   <div class="lgl-head"><h2 id="lgl-privacy-t">Informativa sulla privacy</h2><button type="button" class="lgl-close" aria-label="Chiudi" data-lgl-close>✕</button></div>
   <div class="lgl-body">
@@ -1757,7 +1763,7 @@
   </div>
 </div>
 </div>
-<div class="lgl-overlay" id="lgl-cookie" hidden>
+<div class="lgl-overlay" id="lgl-cookie" hidden data-nosnippet>
 <div class="lgl-dialog" role="dialog" aria-modal="true" aria-labelledby="lgl-cookie-t">
   <div class="lgl-head"><h2 id="lgl-cookie-t">Cookie</h2><button type="button" class="lgl-close" aria-label="Chiudi" data-lgl-close>✕</button></div>
   <div class="lgl-body">
