@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ZirkonIA Score | Quanto è intelligente la tua azienda?</title>
+<meta name="description" content="Dodici domande, 90 secondi: scopri lo ZirkonIA Score della tua azienda e quanto puoi recuperare con un second brain.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#070a12">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="stylesheet" href="../fonts.css">
+<link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+
+<header class="qz-nav">
+  <a class="qz-logo" href="../" aria-label="ZirkonIA, torna al sito">Zirkon<span class="ia">IA</span><sup class="tm">™</sup></a>
+  <span class="qz-nav-label">Score</span>
+</header>
+
+<main id="app" class="qz-main">
+
+  <!-- Schermata 0: apertura -->
+  <section class="qz-screen is-active" data-screen="intro" aria-labelledby="intro-title">
+    <span class="qz-kicker">ZirkonIA<sup class="tm">™</sup> Score</span>
+    <h1 id="intro-title" class="qz-title" tabindex="-1">Quanto è intelligente la tua azienda?</h1>
+    <p class="qz-sub"><em>Scoprilo in 90 secondi.</em></p>
+    <p class="qz-text">Dodici domande, una risposta per ciascuna. Alla fine ricevi il tuo punteggio e quanto puoi recuperare insieme a noi.</p>
+    <button type="button" class="qz-btn qz-btn-primary" id="startBtn">Inizia</button>
+  </section>
+
+  <!-- Schermate 1-12: domande (riempite da quiz.js) -->
+  <section class="qz-screen" data-screen="question" aria-live="polite">
+    <div class="qz-progress" role="progressbar" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-label="Avanzamento del quiz">
+      <div class="qz-progress-bar" id="progressBar"></div>
+    </div>
+    <div class="qz-meta"><span id="qCount">1 / 12</span><span id="qDim"></span></div>
+    <div class="qz-question" id="questionBox">
+      <h2 class="qz-q" id="qText" tabindex="-1"></h2>
+      <div class="qz-options" id="qOptions" role="group" aria-labelledby="qText"></div>
+    </div>
+    <button type="button" class="qz-back" id="backBtn">← Indietro</button>
+  </section>
+
+  <!-- Schermata 13: contatti -->
+  <section class="qz-screen" data-screen="form" aria-labelledby="form-title">
+    <span class="qz-kicker">12 risposte su 12</span>
+    <h2 id="form-title" class="qz-congrats" tabindex="-1"><span class="qz-congrats-pre">Complimenti, sei</span> <span id="congratsArch" class="qz-congrats-arch"></span></h2>
+    <p class="qz-congrats-sub" id="congratsSub"></p>
+    <p class="qz-ready">Il tuo ZirkonIA<sup class="tm">™</sup> Score è pronto</p>
+
+    <!-- anteprima: punteggio di oggi visibile, il resto si sblocca con i dati -->
+    <div class="qz-teaser">
+      <div class="qz-ring" role="img" aria-label="Il tuo punteggio oggi">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4d7fff"/><stop offset="1" stop-color="#7fb0ff"/></linearGradient></defs>
+          <circle class="qz-ring-bg" cx="60" cy="60" r="52"/>
+          <circle class="qz-ring-pot" id="ringPot" cx="60" cy="60" r="52"/>
+          <circle class="qz-ring-now" id="ringNow" cx="60" cy="60" r="52"/>
+        </svg>
+        <div class="qz-ring-num"><b id="teaserScore">0</b><span>su 100</span></div>
+      </div>
+      <div class="qz-teaser-side">
+        <p class="qz-teaser-label" id="teaserLabel">Oggi</p>
+        <ul class="qz-locked" aria-label="Da sbloccare">
+          <li><span>Con ZirkonIA</span><b class="qz-blur" aria-hidden="true">88</b></li>
+          <li><span>Valore asset</span><b class="qz-blur" aria-hidden="true">€ 12.500</b></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="qz-section-kicker">Cosa ricevi</p>
+
+    <div class="qz-report-card">
+      <span class="qz-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+      <div>
+        <b>Il report completo via email</b>
+        <span>Cinque dimensioni · potenziale · valore degli asset</span>
+      </div>
+    </div>
+
+    <div class="qz-consult" aria-labelledby="consult-title">
+      <div class="qz-consult-glow" aria-hidden="true"></div>
+      <div class="qz-consult-top">
+        <span class="qz-badge">Gratuita</span>
+        <span class="qz-consult-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9.5" r="2.6"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15 14.6c.6-.2 1.3-.3 2-.3 2.8 0 4.5 2 4.5 5"/></svg></span>
+      </div>
+      <p class="qz-consult-eyebrow">In più, per te</p>
+      <h3 id="consult-title" class="qz-consult-title">Consulenza<br><span class="qz-nowrap qz-hl">one-to-one</span></h3>
+      <p class="qz-consult-sub">Il tuo risultato letto insieme, sulla <em>tua</em> azienda.</p>
+      <ul class="qz-consult-list">
+        <li><span class="qz-check-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><div><b>Leggiamo insieme il tuo ZirkonIA™ Score</b>Dimensione per dimensione, da dove parti e dove puoi arrivare.</div></li>
+        <li><span class="qz-check-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><div><b>Scegliamo le priorità</b>Gli asset che danno più valore alla tua azienda, nell'ordine giusto.</div></li>
+        <li><span class="qz-check-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><div><b>Quantifichiamo l'impatto sulla tua realtà</b>Più margine, più tempo per te, meno costi ed errori: misurato sul tuo caso.</div></li>
+      </ul>
+      <p class="qz-consult-foot"><span class="qz-avatars" aria-hidden="true"><i>F</i><i>C</i></span>Con Federico e Cristiano del team ZirkonIA™</p>
+    </div>
+
+    <p class="qz-form-intro"><b>Sblocca il tuo risultato completo</b>Ti mostriamo subito il tuo potenziale con ZirkonIA™ e ti inviamo il report con l’invito alla consulenza.</p>
+    <form id="leadForm" class="qz-form" novalidate>
+      <label class="qz-field"><span>Nome</span>
+        <input type="text" name="nome" autocomplete="name" required maxlength="80"></label>
+      <label class="qz-field"><span>Azienda</span>
+        <input type="text" name="azienda" autocomplete="organization" required maxlength="120"></label>
+      <label class="qz-field"><span>Email</span>
+        <input type="email" name="email" autocomplete="email" inputmode="email" required maxlength="160"></label>
+      <label class="qz-field"><span>Cellulare</span>
+        <input type="tel" name="cellulare" autocomplete="tel" inputmode="tel" required maxlength="30"></label>
+      <!-- campo trappola contro i bot: le persone non lo vedono -->
+      <label class="qz-hp" aria-hidden="true">Sito web <input type="text" name="sito" tabindex="-1" autocomplete="off"></label>
+      <label class="qz-check">
+        <input type="checkbox" name="privacy" required>
+        <span>Ho letto l’<button type="button" class="qz-link" id="privacyOpen">informativa sulla privacy</button> e acconsento al trattamento dei miei dati per ricevere il report ed essere ricontattato per la consulenza gratuita.</span>
+      </label>
+      <p class="qz-error" id="formError" role="alert" hidden></p>
+      <button type="submit" class="qz-btn qz-btn-primary qz-btn-glow" id="submitBtn">Scopri il tuo ZirkonIA Score <span aria-hidden="true">→</span></button>
+    </form>
+    <button type="button" class="qz-back" id="formBackBtn">← Indietro</button>
+  </section>
+
+  <!-- Schermata 14: risultato -->
+  <section class="qz-screen" data-screen="result" aria-labelledby="result-title">
+    <span class="qz-kicker qz-kicker-ok">✓ Risultato sbloccato</span>
+    <p class="qz-congrats-pre qz-hello" id="resHello"></p>
+    <h2 id="result-title" class="qz-congrats-arch qz-result-arch" tabindex="-1"></h2>
+    <p class="qz-congrats-sub" id="archSub"></p>
+
+    <div class="qz-card qz-result-card">
+      <div class="qz-scale" aria-hidden="true">
+        <div class="qz-scale-track">
+          <div class="qz-scale-now" id="barNow"></div>
+          <div class="qz-scale-gap" id="barGap"></div>
+        </div>
+        <div class="qz-marker qz-marker-now" id="mkNow"><b id="scoreNow">0</b><span>Oggi</span></div>
+        <div class="qz-marker qz-marker-pot" id="mkPot"><b id="scorePot">0</b><span>Con ZirkonIA</span></div>
+        <div class="qz-scale-ends"><span>0</span><span>100</span></div>
+      </div>
+      <p class="sr-only" id="scoreText"></p>
+      <p class="qz-gap" id="gapText"></p>
+    </div>
+
+    <p class="qz-section-kicker">Un assaggio del tuo report</p>
+    <ul class="qz-hints" id="hints"></ul>
+
+    <div class="qz-mail" id="mailCard">
+      <span class="qz-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+      <div>
+        <b>Controlla la tua email</b>
+        <span id="mailText">Ti abbiamo inviato il report completo.</span>
+        <small>Non lo trovi? Guarda anche in Spam o in Promozioni.</small>
+        <small class="qz-mail-test" id="mailTest" hidden>Anteprima: l’invio non è ancora collegato.</small>
+      </div>
+    </div>
+
+    <div class="qz-consult qz-consult-cta">
+      <div class="qz-consult-glow" aria-hidden="true"></div>
+      <div class="qz-consult-top"><span class="qz-badge">Gratuita</span></div>
+      <h3 class="qz-consult-title">Il prossimo passo:<br><span class="qz-hl">consulenza one-to-one</span></h3>
+      <p class="qz-consult-sub">Leggiamo insieme il tuo risultato e trasformiamo i punti da recuperare in un percorso concreto.</p>
+      <a class="qz-btn qz-btn-primary qz-btn-glow" id="bookBtn" href="#" target="_blank" rel="noopener">Prenota la tua consulenza <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+</main>
+
+<!-- Informativa privacy del quiz: BOZZA da far verificare a un professionista -->
+<dialog class="qz-dialog" id="privacyDialog" aria-labelledby="privacy-title">
+  <div class="qz-dialog-head">
+    <h2 id="privacy-title">Informativa sulla privacy dello ZirkonIA<sup class="tm">™</sup> Score</h2>
+    <button type="button" class="qz-close" id="privacyClose" aria-label="Chiudi">✕</button>
+  </div>
+  <div class="qz-dialog-body">
+    <p><strong>Titolare del trattamento</strong>: CristianoGMusa di Giuseppe Musa (P.IVA 03643440922), Via Salvatore Cambosu, 42 - 09047 Selargius (CA), marchio commerciale Com &amp; Key Experience, che offre ZirkonIA™. Contatti: communikeyexperience@gmail.com, PEC cristianogmusa@postecert.it.</p>
+    <p><strong>Dati raccolti</strong>: nome, azienda, email, cellulare e le risposte alle dodici domande, con il punteggio calcolato.</p>
+    <p><strong>Perché</strong>: inviarti il report con il tuo ZirkonIA™ Score e ricontattarti per proporti la consulenza gratuita collegata al risultato. Base giuridica: il tuo consenso e le misure precontrattuali adottate su tua richiesta (art. 6.1.a e 6.1.b GDPR). Non usiamo i dati per pubblicità di terzi e non li vendiamo.</p>
+    <p><strong>Chi li tratta</strong>: Google (Fogli, Drive e Gmail), dove salviamo le risposte e da cui inviamo il report; GitHub, che ospita la pagina. Questi fornitori possono trattare i dati anche negli Stati Uniti, con le garanzie previste dal GDPR.</p>
+    <p><strong>Per quanto tempo</strong>: se non nasce una collaborazione, al massimo 24 mesi dall’ultimo contatto.</p>
+    <p><strong>I tuoi diritti</strong>: accesso, correzione, cancellazione, limitazione, opposizione, portabilità e revoca del consenso in qualsiasi momento, scrivendo ai contatti sopra. Puoi anche presentare reclamo al Garante per la protezione dei dati personali.</p>
+  </div>
+</dialog>
+
+<script src="data.js"></script>
+<script src="score.js"></script>
+<script src="quiz.js"></script>
+</body>
+</html>
