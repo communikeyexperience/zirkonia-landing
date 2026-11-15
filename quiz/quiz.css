@@ -247,3 +247,10 @@ sup.tm{ font-size:.42em; font-weight:500; line-height:1; vertical-align:baseline
 .qz-consult-cta{ margin-top:22px; }
 .qz-consult-cta .qz-consult-title{ margin-top:14px; font-size:clamp(24px,6.6vw,30px); }
 .qz-consult-cta .qz-btn{ margin-top:20px; }
+
+/* stati dell'invio del report */
+.qz-mail.qz-mail-warn{ border-color:rgba(255,184,77,.5); background:rgba(255,184,77,.08); }
+.qz-mail.qz-mail-warn .qz-ico{ color:var(--gold); background:rgba(255,184,77,.12); border-color:rgba(255,184,77,.45); }
+.qz-mail-retry{ margin-top:12px; padding:11px 18px; min-height:44px; border-radius:6px; border:1px solid rgba(255,184,77,.6);
+  background:rgba(255,184,77,.14); color:#ffe2a8; font:600 14px 'Inter',sans-serif; cursor:pointer; }
+.qz-mail-retry[hidden]{ display:none; }

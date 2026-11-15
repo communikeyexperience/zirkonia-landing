@@ -151,14 +151,61 @@
     return errs;
   }
 
+  /* Invio robusto: fino a 3 tentativi (subito, dopo 2 e dopo 5 secondi), con keepalive
+     perché la richiesta prosegua anche se il visitatore chiude la pagina.
+     Con mode no-cors il browser segnala solo gli errori di rete, che sono il caso tipico in fiera. */
+  var mailState = 'idle', lastPayload = null;
+  var RETRY_DELAYS = [0, 2000, 5000];
+
   function send(payload) {
     if (!ENDPOINT) { if (window.console) console.warn('ZirkonIA Score: ENDPOINT non impostato, invio saltato.'); return; }
     if (sent) return;
     sent = true;
-    try {
-      fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload) })
-        .catch(function () { sent = false; });
-    } catch (e) { /* rete assente: il risultato si mostra comunque */ }
+    lastPayload = payload;
+    attempt(0);
+  }
+
+  function attempt(i) {
+    setMail('sending');
+    setTimeout(function () {
+      var done = function () { setMail('ok'); };
+      var fail = function () {
+        if (i + 1 < RETRY_DELAYS.length) attempt(i + 1);
+        else { sent = false; setMail('fail'); }
+      };
+      try {
+        fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', keepalive: true,
+          headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(lastPayload) })
+          .then(done, fail);
+      } catch (e) { fail(); }
+    }, RETRY_DELAYS[i]);
+  }
+
+  function retrySend() {
+    if (!lastPayload || mailState === 'sending') return;
+    sent = true;
+    attempt(0);
+  }
+
+  function setMail(state) { mailState = state; renderMail(); }
+
+  function renderMail() {
+    var card = $('mailCard'); if (!card) return;
+    var email = lastPayload ? lastPayload.email : '';
+    var title = $('mailTitle'), text = $('mailText'), hint = $('mailHint'), retry = $('mailRetry');
+    card.classList.toggle('qz-mail-warn', mailState === 'fail');
+    retry.hidden = mailState !== 'fail';
+    hint.hidden = mailState !== 'ok';
+    if (mailState === 'sending') {
+      title.textContent = 'Stiamo inviando il report…';
+      text.textContent = 'Lo riceverai a ' + email + ' tra pochi istanti.';
+    } else if (mailState === 'fail') {
+      title.textContent = 'Il report non è ancora partito';
+      text.textContent = 'La connessione sembra assente. Controlla la rete e premi «Riprova l’invio»: le tue risposte sono ancora qui.';
+    } else {
+      title.textContent = 'Controlla la tua email';
+      text.textContent = 'Ti abbiamo inviato il report completo a ' + email + '.';
+    }
   }
 
   function onSubmit(ev) {
@@ -205,17 +252,18 @@
   function renderHints(res) {
     var dims = res.dimensions;
     var best = dims.reduce(function (a, b) { return b.score > a.score ? b : a; });
-    var low = dims.reduce(function (a, b) { return b.score < a.score ? b : a; });
-    var items = best.score > low.score
-      ? [['Il tuo punto di forza', best.name, best.score], ['Dove recuperi di più', low.name, low.score]]
-      : [['Le tue cinque dimensioni', 'In equilibrio tra loro', best.score]];
+    /* «Dove recuperi di più» = la dimensione che può dare più punti allo Score (tiene conto dei pesi) */
+    var gain = dims.reduce(function (a, b) { return b.recoverable > a.recoverable ? b : a; });
+    var items = [['Il tuo punto di forza', best.name, best.score, String(best.score)]];
+    if (gain.recoverable > 0 && gain.key !== best.key) items.push(['Dove recuperi di più', gain.name, gain.score, '+' + Math.round(gain.recoverable)]);
+    else if (gain.recoverable > 0) items = [['Dove recuperi di più', gain.name, gain.score, '+' + Math.round(gain.recoverable)]];
     var box = $('hints'); box.innerHTML = '';
     items.forEach(function (it) {
       var li = document.createElement('li');
       li.innerHTML = '<div><small></small><b></b></div><div class="qz-hint-bar"><i></i></div><span class="qz-hint-num"></span>';
       li.querySelector('small').textContent = it[0];
       li.querySelector('b').textContent = it[1];
-      li.querySelector('.qz-hint-num').textContent = it[2];
+      li.querySelector('.qz-hint-num').textContent = it[3];
       li.querySelector('i').style.width = it[2] + '%';
       box.appendChild(li);
     });
@@ -243,7 +291,8 @@
       ? 'Insieme possiamo recuperare <strong>' + res.gap + ' punti</strong>.'
       : 'Sei già al tuo massimo: parliamone da colleghi.';
     renderHints(res);
-    $('mailText').textContent = 'Ti abbiamo inviato il report completo a ' + email + '.';
+    if (!lastPayload) lastPayload = { email: email };
+    renderMail();
     $('mailTest').hidden = !!ENDPOINT;
     $('bookBtn').href = bookingUrl(res, nome, azienda);
 
@@ -302,4 +351,5 @@
   $('backBtn').addEventListener('click', back);
   $('formBackBtn').addEventListener('click', function () { current = N - 1; renderQuestion(); show('question', 'qText'); });
   $('leadForm').addEventListener('submit', onSubmit);
+  $('mailRetry').addEventListener('click', retrySend);
 })();

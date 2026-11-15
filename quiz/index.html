@@ -146,9 +146,10 @@
     <div class="qz-mail" id="mailCard">
       <span class="qz-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
       <div>
-        <b>Controlla la tua email</b>
+        <b id="mailTitle">Controlla la tua email</b>
         <span id="mailText">Ti abbiamo inviato il report completo.</span>
-        <small>Non lo trovi? Guarda anche in Spam o in Promozioni.</small>
+        <small id="mailHint">Non lo trovi? Guarda anche in Spam o in Promozioni.</small>
+        <button type="button" class="qz-mail-retry" id="mailRetry" hidden>Riprova l’invio</button>
         <small class="qz-mail-test" id="mailTest" hidden>Anteprima: l’invio non è ancora collegato.</small>
       </div>
     </div>

@@ -18,7 +18,9 @@ var ZK_SCORE = (function () {
       for (var q = 0; q < dim.questions.length; q++) raw += answers[dim.questions[q]];
       var max = dim.questions.length * 3;
       exact += raw / max * dim.weight;
-      dims.push({ key: dim.key, name: dim.name, raw: raw, max: max, score: Math.round(raw / max * 100) });
+      /* recoverable: punti dello ZirkonIA Score che la dimensione può ancora dare (pesata), 1 decimale */
+      dims.push({ key: dim.key, name: dim.name, raw: raw, max: max, score: Math.round(raw / max * 100),
+        recoverable: Math.round((max - raw) / max * dim.weight * 10) / 10 });
     }
 
     var score = Math.round(exact);
