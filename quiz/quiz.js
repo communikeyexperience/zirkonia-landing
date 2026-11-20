@@ -18,6 +18,13 @@
     return WHATSAPP + '?text=' + encodeURIComponent(testo);
   }
 
+  /* Fonte del lead: «sito» di norma; per un evento si aggiunge ?src=nome all'indirizzo del QR
+     (per esempio zirkonia.ai/quiz/?src=fiera-iknosys). Solo lettere, cifre e trattini. */
+  var SOURCE = (function () {
+    var m = /[?&]src=([a-z0-9-]{1,40})/i.exec(location.search);
+    return m ? m[1].toLowerCase() : 'sito';
+  })();
+
   var sent = false; /* un solo invio per pagina; i doppi invii tra pagine li blocca lo script */
   var D = ZK_DATA;
   var N = D.questions.length;
@@ -117,7 +124,7 @@
     locked[0].textContent = String(res.potential);
     locked[1].textContent = '€ ' + ZK_SCORE.euro(res.assetsTotal);
     var lvl = /^Livello/.test(res.archetype.name);
-    document.querySelector('.qz-congrats-pre').textContent = lvl ? 'Complimenti, sei a' : 'Complimenti, sei un';
+    document.querySelector('.qz-congrats-pre').textContent = lvl ? 'Complimenti, sei a' : 'Complimenti, il tuo livello è';
     $('congratsArch').textContent = res.archetype.name;
     $('congratsSub').textContent = res.archetype.subtitle;
     var now = $('ringNow'), pot = $('ringPot');
@@ -239,7 +246,7 @@
         score: res.score,
         potential: res.potential,
         archetype: res.archetype.name,
-        source: 'quiz-fiera',
+        source: SOURCE,
         ts: new Date().toISOString()
       });
     }
@@ -280,7 +287,7 @@
 
   function showResult(res, nome, email, azienda) {
     var first = (nome || '').split(' ')[0];
-    var a = /^Livello/.test(res.archetype.name) ? 'sei a' : 'sei un';
+    var a = /^Livello/.test(res.archetype.name) ? 'sei a' : 'il tuo livello è';
     $('resHello').textContent = first ? first + ', ' + a : a.charAt(0).toUpperCase() + a.slice(1);
     $('result-title').textContent = res.archetype.name;
     $('archSub').textContent = res.archetype.subtitle;
