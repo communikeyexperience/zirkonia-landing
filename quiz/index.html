@@ -21,7 +21,7 @@
 <meta name="twitter:title" content="ZirkonIA Score | Quanto è intelligente la tua azienda?">
 <meta name="twitter:description" content="Dodici domande, 90 secondi: scopri lo ZirkonIA Score della tua azienda e quanto puoi recuperare con un second brain.">
 <meta name="twitter:image" content="https://zirkonia.ai/og-image.png">
-<meta name="theme-color" content="#070a12">
+<meta name="theme-color" content="#ffffff">
 <link rel="icon" href="../favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="stylesheet" href="../fonts.css">
@@ -41,8 +41,25 @@
     <span class="qz-kicker">ZirkonIA<sup class="tm">™</sup> Score</span>
     <h1 id="intro-title" class="qz-title" tabindex="-1">Quanto è intelligente la tua azienda?</h1>
     <p class="qz-sub"><em>Scoprilo in 90 secondi.</em></p>
-    <p class="qz-text">Dodici domande, una risposta per ciascuna. Alla fine ricevi il tuo punteggio e quanto puoi recuperare insieme a noi.</p>
+    <p class="qz-text">Due domande sulla tua azienda, poi dodici sul tuo modo di lavorare. Alla fine ricevi il tuo punteggio e quanto valgono gli asset che puoi costruire insieme a noi.</p>
     <button type="button" class="qz-btn qz-btn-primary" id="startBtn">Inizia</button>
+  </section>
+
+  <!-- Profilo: settore e dimensione (non cambiano il punteggio, personalizzano il report) -->
+  <section class="qz-screen" data-screen="profile" aria-labelledby="profile-title">
+    <span class="qz-kicker">Prima di iniziare</span>
+    <h2 id="profile-title" class="qz-q qz-profile-title" tabindex="-1">Raccontaci la tua azienda</h2>
+    <p class="qz-profile-sub">Ci serve per darti esempi e valori sulla tua realtà.</p>
+    <fieldset class="qz-fieldset">
+      <legend>In che settore lavori?</legend>
+      <div class="qz-chips" id="sectorChips"></div>
+    </fieldset>
+    <fieldset class="qz-fieldset">
+      <legend>Quante persone lavorano in azienda, te compreso?</legend>
+      <div class="qz-chips qz-chips-size" id="sizeChips"></div>
+    </fieldset>
+    <button type="button" class="qz-btn qz-btn-primary" id="profileNext" disabled>Inizia le domande <span aria-hidden="true">→</span></button>
+    <button type="button" class="qz-back" id="profileBack">← Indietro</button>
   </section>
 
   <!-- Schermate 1-12: domande (riempite da quiz.js) -->
@@ -69,7 +86,7 @@
     <div class="qz-teaser">
       <div class="qz-ring" role="img" aria-label="Il tuo punteggio oggi">
         <svg viewBox="0 0 120 120" aria-hidden="true">
-          <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4d7fff"/><stop offset="1" stop-color="#7fb0ff"/></linearGradient></defs>
+          <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1a3f"/><stop offset=".45" stop-color="#1d4a9c"/><stop offset="1" stop-color="#4f8df5"/><animateTransform attributeName="gradientTransform" type="rotate" from="0 .5 .5" to="360 .5 .5" dur="9s" repeatCount="indefinite"/></linearGradient></defs>
           <circle class="qz-ring-bg" cx="60" cy="60" r="52"/>
           <circle class="qz-ring-pot" id="ringPot" cx="60" cy="60" r="52"/>
           <circle class="qz-ring-now" id="ringNow" cx="60" cy="60" r="52"/>
@@ -98,7 +115,7 @@
     <div class="qz-consult" aria-labelledby="consult-title">
       <div class="qz-consult-glow" aria-hidden="true"></div>
       <div class="qz-consult-top">
-        <span class="qz-badge">Gratuita</span>
+        <span class="qz-badge">Gratuita</span><span class="qz-chip">60 minuti</span>
         <span class="qz-consult-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9.5" r="2.6"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15 14.6c.6-.2 1.3-.3 2-.3 2.8 0 4.5 2 4.5 5"/></svg></span>
       </div>
       <p class="qz-consult-eyebrow">In più, per te</p>
@@ -109,6 +126,7 @@
         <li><span class="qz-check-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><div><b>Scegliamo le priorità</b>Gli asset che danno più valore alla tua azienda, nell'ordine giusto.</div></li>
         <li><span class="qz-check-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><div><b>Quantifichiamo l'impatto sulla tua realtà</b>Più margine, più tempo per te, meno costi ed errori: misurato sul tuo caso.</div></li>
       </ul>
+      <p class="qz-scarcity"><span class="qz-live" aria-hidden="true"></span><span>Ogni settimana apriamo solo <strong>10 consulenze</strong>.</span></p>
       <p class="qz-consult-foot"><span class="qz-avatars" aria-hidden="true"><i>F</i><i>C</i></span>Con Federico e Cristiano del team ZirkonIA™</p>
     </div>
 
@@ -134,7 +152,8 @@
     <button type="button" class="qz-back" id="formBackBtn">← Indietro</button>
   </section>
 
-  <!-- Schermata 14: risultato -->
+  <!-- Schermata 14: risultato. Ordine pensato per portare alla consulenza:
+       risultato → punti da recuperare → consulenza personalizzata → assaggio del report → email -->
   <section class="qz-screen" data-screen="result" aria-labelledby="result-title">
     <span class="qz-kicker qz-kicker-ok">✓ Risultato sbloccato</span>
     <p class="qz-congrats-pre qz-hello" id="resHello"></p>
@@ -142,24 +161,50 @@
     <p class="qz-congrats-sub" id="archSub"></p>
 
     <div class="qz-card qz-result-card">
+      <p class="qz-gap-big" id="gapText"></p>
       <div class="qz-scale" aria-hidden="true">
         <div class="qz-scale-track">
           <div class="qz-scale-now" id="barNow"></div>
           <div class="qz-scale-gap" id="barGap"></div>
         </div>
+        <div class="qz-scale-tip" aria-hidden="true"></div>
         <div class="qz-marker qz-marker-now" id="mkNow"><b id="scoreNow">0</b><span>Oggi</span></div>
         <div class="qz-marker qz-marker-pot" id="mkPot"><b id="scorePot">0</b><span>Con ZirkonIA</span></div>
         <div class="qz-scale-ends"><span>0</span><span>100</span></div>
       </div>
       <p class="sr-only" id="scoreText"></p>
-      <p class="qz-gap" id="gapText"></p>
+    </div>
+
+    <div class="qz-consult qz-consult-cta" id="consultMain">
+      <div class="qz-consult-glow" aria-hidden="true"></div>
+      <div class="qz-consult-top"><span class="qz-badge">Gratuita</span><span class="qz-chip">60 minuti · one-to-one</span></div>
+      <h3 class="qz-consult-title" id="ctaTitle">Recuperiamoli insieme.</h3>
+      <p class="qz-consult-sub">Una consulenza dedicata alla tua azienda, costruita sul tuo ZirkonIA<sup class="tm">™</sup> Score.</p>
+      <ul class="qz-consult-list">
+        <li><span class="qz-check-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><div><b>Leggiamo il tuo risultato</b>Dimensione per dimensione: da dove parti e dove puoi arrivare.</div></li>
+        <li><span class="qz-check-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><div><b>Scegliamo le priorità</b>Gli asset che danno più valore alla tua azienda, nell’ordine giusto.</div></li>
+        <li><span class="qz-check-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><div><b>Esci con un percorso concreto</b>I passi per recuperare i tuoi punti, misurati sulla tua realtà.</div></li>
+      </ul>
+      <p class="qz-scarcity"><span class="qz-live" aria-hidden="true"></span><span>Ogni settimana apriamo solo <strong>10 consulenze</strong>.</span></p>
+      <a class="qz-btn qz-btn-primary qz-btn-glow qz-btn-book" id="bookBtn" href="#" target="_blank" rel="noopener">Prenota la consulenza <span aria-hidden="true">→</span></a>
+      <p class="qz-consult-foot"><span class="qz-avatars" aria-hidden="true"><i>F</i><i>C</i></span>Con Federico e Cristiano del team ZirkonIA™</p>
     </div>
 
     <p class="qz-section-kicker">Un assaggio del tuo report</p>
     <ul class="qz-hints" id="hints"></ul>
 
+    <div class="qz-assets" id="assetsBox" hidden>
+      <div class="qz-assets-head">
+        <div><small id="assetsFor">Cosa costruiresti con ZirkonIA</small><b id="assetsTitle"></b></div>
+        <span class="qz-assets-total" id="assetsTotal"></span>
+      </div>
+      <ul class="qz-assets-list" id="assetsList"></ul>
+      <p class="qz-assets-note">Valore di mercato stimato per un’azienda della tua dimensione. L’impatto sulla tua performance lo quantifichiamo insieme, nella consulenza.</p>
+    </div>
+    <p class="qz-hints-more">Il resto lo leggiamo insieme nella consulenza.</p>
+
     <div class="qz-mail" id="mailCard">
-      <span class="qz-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+      <span class="qz-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
       <div>
         <b id="mailTitle">Controlla la tua email</b>
         <span id="mailText">Ti abbiamo inviato il report completo.</span>
@@ -169,12 +214,9 @@
       </div>
     </div>
 
-    <div class="qz-consult qz-consult-cta">
-      <div class="qz-consult-glow" aria-hidden="true"></div>
-      <div class="qz-consult-top"><span class="qz-badge">Gratuita</span></div>
-      <h3 class="qz-consult-title">Il prossimo passo:<br><span class="qz-hl">consulenza one-to-one</span></h3>
-      <p class="qz-consult-sub">Leggiamo insieme il tuo risultato e trasformiamo i punti da recuperare in un percorso concreto.</p>
-      <a class="qz-btn qz-btn-primary qz-btn-glow" id="bookBtn" href="#" target="_blank" rel="noopener">Prenota la tua consulenza <span aria-hidden="true">→</span></a>
+    <!-- pulsante fisso su telefono: compare quando il riquadro della consulenza non è visibile -->
+    <div class="qz-sticky" id="stickyBook" aria-hidden="true">
+      <a class="qz-btn qz-btn-primary qz-btn-book" id="bookBtn2" href="#" target="_blank" rel="noopener" tabindex="-1">Prenota la consulenza gratuita <span aria-hidden="true">→</span></a>
     </div>
   </section>
 

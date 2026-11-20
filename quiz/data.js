@@ -1,11 +1,12 @@
 /* ZirkonIA Score: dati del quiz (domande, opzioni, pesi, archetipi, asset).
    Fonte: specifica «ZirkonIA Score — Quiz per la fiera», sezioni 3, 4, 6, 7, 8.
-   Questo file è copiato identico in apps-script/Data.gs: se lo modifichi, ricopialo.
+   Questo file è copiato identico in Data.gs della Web App: se lo modifichi, ricopialo.
    Le opzioni sono in ordine crescente: indice 0 = 0 punti, indice 3 = 3 punti.
    points: punti delle opzioni quando non coincidono con l'indice (domanda 5, cinque opzioni
    dal 2026-11-15 su richiesta di Cristiano: il second brain con AI vale 3).
    unsure: risposta «non so / non riesco», mostrata per ultima e valutata 0 punti
-   (aggiunta su richiesta di Cristiano il 2026-11-15, non presente nella specifica). */
+   (aggiunta su richiesta di Cristiano il 2026-11-15, non presente nella specifica).
+   Domande 1, 2, 6, 8 e 11 riscritte e validate da Federico il 2026-11-20. */
 var ZK_DATA = {
   dimensions: [
     { key: 'A', name: 'Memoria delle riunioni e delle decisioni', weight: 27, questions: [0, 1, 2] },
@@ -16,18 +17,18 @@ var ZK_DATA = {
   ],
 
   questions: [
-    { dim: 'A', text: 'Quando fai una riunione con il tuo team, cosa resta alla fine?', options: [
-      'Niente di scritto: ci ricordiamo quello che possiamo',
-      'Qualche appunto personale su carta o sul telefono',
-      'Un verbale o un riepilogo scritto, condiviso con chi c’era',
-      'Una registrazione trascritta e archiviata, che posso rileggere o interrogare quando voglio'
+    { dim: 'A', text: 'Dopo una riunione con il tuo team, dove restano le informazioni e le decisioni prese?', options: [
+      'Solo nella memoria di chi c’era',
+      'In qualche appunto personale, su carta o sul telefono',
+      'In un verbale o un riepilogo scritto, condiviso con chi c’era',
+      'In un archivio con la registrazione trascritta, che posso rileggere o interrogare quando voglio'
     ] },
-    { dim: 'A', text: 'Come ritrovi oggi le motivazioni di una decisione importante presa sei mesi fa?', options: [
-      'Vado a memoria, e probabilmente ricostruisco a modo mio',
-      'Chiedo a chi c’era e mettiamo insieme i pezzi',
-      'Cerco tra email, chat e documenti sparsi',
-      'Apro il registro delle decisioni e trovo motivazioni, alternative e chi ha deciso'
-    ], unsure: 'Mi viene difficile ricostruire il percorso' },
+    { dim: 'A', text: 'Dove ritrovi oggi i documenti e il percorso di una decisione importante presa sei mesi fa?', options: [
+      'Da nessuna parte: vado a memoria e ricostruisco a modo mio',
+      'Nella memoria di chi c’era: chiedo e mettiamo insieme i pezzi',
+      'Sparsi tra email, chat e cartelle: devo cercarli',
+      'In un registro delle decisioni, con motivazioni, alternative e chi ha deciso'
+    ], unsure: 'Non saprei: non teniamo traccia delle decisioni' },
     { dim: 'A', text: 'Le idee che ti vengono fuori dall’ufficio (in macchina, con un cliente, la sera) che fine fanno?', options: [
       'Per lo più si perdono',
       'Le scrivo in note sparse, poi le ritrovo ogni tanto',
@@ -47,11 +48,11 @@ var ZK_DATA = {
       'In un unico archivio collegato, dove tutto è ricercabile',
       'In un second brain con intelligenza artificiale, che collega tutto e risponde alle mie domande'
     ], points: [0, 1, 2, 2, 3], unsure: 'Non saprei dirlo con precisione' },
-    { dim: 'B', text: 'Quando devi preparare un numero per una banca, un socio o un bando, come va?', options: [
-      'È sempre un’emergenza',
-      'Ce la faccio ma mi costa una giornata',
-      'Ho report pronti che aggiorno',
-      'Estraggo quello che serve in pochi minuti, in qualunque momento'
+    { dim: 'B', text: 'Quando devi preparare un report sull’andamento dell’azienda per un socio, una banca o un bando, da dove prendi i dati?', options: [
+      'Li ricostruisco ogni volta da zero, ed è sempre un’emergenza',
+      'Li raccolgo da fonti diverse: mi costa almeno una giornata',
+      'Da report che aggiorno regolarmente',
+      'Da un unico sistema che mi dà quello che serve in pochi minuti'
     ], unsure: 'Non saprei: se ne occupa il commercialista' },
     { dim: 'C', text: 'Se domani assumi una persona nuova, come impara a lavorare come volete voi?', options: [
       'Guardando gli altri e facendo domande',
@@ -59,11 +60,11 @@ var ZK_DATA = {
       'Con un manuale o delle procedure scritte, anche se un po’ datate',
       'Con procedure aggiornate, consultabili e collegate agli esempi reali'
     ] },
-    { dim: 'C', text: 'Le cose che funzionano bene nella tua azienda (il modo di servire un cliente, di fare un preventivo, di gestire un reclamo) sono scritte da qualche parte?', options: [
-      'No, sono nella pratica quotidiana',
-      'Alcune sì, la maggior parte no',
-      'Le principali sono scritte e condivise',
-      'Sono scritte, aggiornate e ogni volta che miglioriamo qualcosa lo registriamo'
+    { dim: 'C', text: 'Il modo di lavorare della tua azienda (procedure, regole, standard di qualità) è scritto in un protocollo aziendale?', options: [
+      'No, vive nella pratica quotidiana e nella testa delle persone',
+      'In parte: qualche procedura scritta, il resto si tramanda a voce',
+      'Sì, le procedure principali sono scritte e condivise',
+      'Sì, in un protocollo aggiornato: ogni volta che miglioriamo qualcosa lo registriamo'
     ], unsure: 'Non saprei dirlo con certezza' },
     { dim: 'D', text: 'Quando devi prendere una decisione importante, su cosa ti basi soprattutto?', options: [
       'Istinto ed esperienza',
@@ -77,11 +78,11 @@ var ZK_DATA = {
       'Sì, in modo informale',
       'Sì, con un momento dedicato e con i numeri davanti'
     ] },
-    { dim: 'E', text: 'Se stai fuori due settimane senza telefono, cosa succede in azienda?', options: [
-      'Si ferma o va in difficoltà seria',
-      'Va avanti sull’ordinario, ma tutto il resto aspetta',
-      'Va avanti bene, con qualche decisione rimandata',
-      'Va avanti e il team trova quello che serve nei nostri archivi'
+    { dim: 'E', text: 'Se per forza dovessi mancare due settimane, senza poter essere raggiunto, cosa succederebbe in azienda?', options: [
+      'Si fermerebbe o andrebbe in seria difficoltà',
+      'Andrebbe avanti sull’ordinario, ma tutto il resto aspetterebbe',
+      'Andrebbe avanti bene, con qualche decisione rimandata',
+      'Andrebbe avanti: il team troverebbe da solo le informazioni che servono'
     ], unsure: 'Non saprei: non è mai successo' },
     { dim: 'E', text: 'Quanto del valore della tua azienda è legato a ciò che sai solo tu?', options: [
       'Quasi tutto',
@@ -102,15 +103,110 @@ var ZK_DATA = {
   ],
 
   /* Asset attivati quando il punteggio della dimensione è sotto ASSET_THRESHOLD.
-     Valori della sezione 8: DA VALIDARE prima della fiera (si mostra il valore basso). */
+     low/high: forbice di valore di mercato annuo (specifica, sezione 8: DA VALIDARE).
+     Il valore mostrato dipende da dimensione, settore e bisogno (vedi «Profilo» qui sotto e score.js).
+     value = valore minimo, usato se il profilo manca. */
   assetThreshold: 60,
   assets: [
-    { dim: 'A', name: 'Archivio riunioni trascritto e interrogabile', value: 2000 },
-    { dim: 'A', name: 'Registro delle decisioni', value: 2000 },
-    { dim: 'B', name: 'Cruscotto aziendale unico, interrogabile a voce', value: 3000 },
-    { dim: 'C', name: 'Manuale operativo vivo (procedure collegate agli esempi reali)', value: 2500 },
-    { dim: 'D', name: 'Storico decisioni con verifica dei risultati', value: 2000 },
-    { dim: 'E', name: 'Protocollo aziendale: il profilo strutturato di persona e impresa, trasferibile', value: 3000 }
+    { id: 'riunioni', dim: 'A', name: 'Archivio riunioni trascritto e interrogabile', value: 2000, low: 2000, high: 4000 },
+    { id: 'decisioni', dim: 'A', name: 'Registro delle decisioni', value: 2000, low: 2000, high: 5000 },
+    { id: 'cruscotto', dim: 'B', name: 'Cruscotto aziendale unico, interrogabile a voce', value: 3000, low: 3000, high: 9000 },
+    { id: 'manuale', dim: 'C', name: 'Manuale operativo vivo (procedure collegate agli esempi reali)', value: 2500, low: 2500, high: 8000 },
+    { id: 'storico', dim: 'D', name: 'Storico decisioni con verifica dei risultati', value: 2000, low: 2000, high: 5000 },
+    { id: 'protocollo', dim: 'E', name: 'Protocollo aziendale: il profilo strutturato di persona e impresa, trasferibile', value: 3000, low: 3000, high: 6000 }
+  ],
+
+  /* Profilo (aggiunto il 2026-11-20 su richiesta di Federico): due domande all'inizio,
+     non cambiano il punteggio. Valore di ogni asset (score.js):
+     forbice low–high secondo la dimensione (t) × correttivo del settore (factor, DA VALIDARE)
+     × bisogno della dimensione (più è scoperta, più vale: da ×0,9 a ×1,1),
+     arrotondato a 50 € evitando le cifre tonde. Il settore sceglie anche gli esempi. */
+  sizes: [
+    { key: 'solo', label: 'Solo io', t: 0 },
+    { key: '2-5', label: '2–5 persone', t: 0.15 },
+    { key: '6-15', label: '6–15 persone', t: 0.35 },
+    { key: '16-50', label: '16–50 persone', t: 0.6 },
+    { key: '51-250', label: '51–250 persone', t: 0.85 },
+    { key: '250+', label: 'Oltre 250 persone', t: 1 }
+  ],
+  sectors: [
+    { key: 'ristorazione', factor: 0.95, label: 'Ristorazione e bar', noun: 'il tuo locale', ex: {
+      riunioni: 'briefing di sala e cucina, accordi con i fornitori',
+      decisioni: 'perché hai cambiato menu, prezzi o fornitore',
+      cruscotto: 'food cost, coperti e spesa per fornitore in pochi secondi',
+      manuale: 'ricette, procedure di sala, apertura e chiusura',
+      storico: 'promozioni ed eventi: cosa ha funzionato davvero',
+      protocollo: 'il locale trasferibile a un socio, a un erede o a una seconda sede' } },
+    { key: 'benessere', factor: 0.9, label: 'Parrucchieri, estetica e benessere', noun: 'il tuo salone', ex: {
+      riunioni: 'riunioni di staff e appunti sui clienti',
+      decisioni: 'scelte su listino, prodotti e orari',
+      cruscotto: 'incassi per servizio, prodotti venduti, clienti che tornano',
+      manuale: 'protocolli di trattamento, accoglienza, vendita dei prodotti',
+      storico: 'campagne e novità: cosa ha riempito l’agenda',
+      protocollo: 'il metodo del salone trasferibile a un collaboratore o a un nuovo punto' } },
+    { key: 'commercio', factor: 0.95, label: 'Commercio e negozi', noun: 'il tuo negozio', ex: {
+      riunioni: 'incontri con fornitori e rappresentanti',
+      decisioni: 'perché hai scelto un marchio, un prezzo, una vetrina',
+      cruscotto: 'venduto, giacenze e margini per prodotto',
+      manuale: 'cassa, ordini, resi e assistenza ai clienti',
+      storico: 'saldi e promozioni a confronto, anno su anno',
+      protocollo: 'il negozio trasferibile a un erede o a un nuovo responsabile' } },
+    { key: 'artigianato', factor: 0.9, label: 'Artigianato e laboratori', noun: 'la tua bottega', ex: {
+      riunioni: 'accordi con clienti e fornitori',
+      decisioni: 'preventivi, materiali e tempi scelti',
+      cruscotto: 'commesse, ore e materiali per lavoro',
+      manuale: 'lavorazioni, tolleranze e trucchi del mestiere',
+      storico: 'preventivi vinti e persi, e perché',
+      protocollo: 'il saper fare della bottega trasferibile a un apprendista' } },
+    { key: 'industria', factor: 1.15, label: 'Industria e produzione', noun: 'la tua azienda', ex: {
+      riunioni: 'riunioni di produzione, qualità e commerciali',
+      decisioni: 'investimenti, fornitori e scelte di processo',
+      cruscotto: 'produzione, scarti, ordini e marginalità per commessa',
+      manuale: 'istruzioni operative, sicurezza e qualità',
+      storico: 'investimenti e cambi di processo misurati sui risultati',
+      protocollo: 'il know-how di processo trasferibile, anche nel passaggio generazionale' } },
+    { key: 'edilizia', factor: 1.1, label: 'Edilizia e immobiliare', noun: 'la tua impresa', ex: {
+      riunioni: 'riunioni di cantiere e con i committenti',
+      decisioni: 'varianti, subappalti e scelte tecniche',
+      cruscotto: 'costi per cantiere, stati di avanzamento e scadenze',
+      manuale: 'procedure di cantiere, sicurezza, consegna dei lavori',
+      storico: 'cantieri chiusi: tempi e costi previsti contro reali',
+      protocollo: 'il modo di lavorare dell’impresa trasferibile a capocantiere e soci' } },
+    { key: 'turismo', factor: 1.05, label: 'Turismo e ospitalità', noun: 'la tua struttura', ex: {
+      riunioni: 'briefing di reparto e incontri con i partner',
+      decisioni: 'tariffe, canali di vendita e servizi',
+      cruscotto: 'occupazione, prezzo medio e recensioni per periodo',
+      manuale: 'check-in, pulizie, gestione dei reclami',
+      storico: 'stagioni a confronto: tariffe e campagne',
+      protocollo: 'la struttura trasferibile a un direttore o a un nuovo gestore' } },
+    { key: 'salute', factor: 1.1, label: 'Studi medici e sanità', noun: 'il tuo studio', ex: {
+      riunioni: 'riunioni d’équipe e con i fornitori',
+      decisioni: 'acquisti di attrezzature e organizzazione delle agende',
+      cruscotto: 'prestazioni, agende e incassi per professionista',
+      manuale: 'accoglienza, sterilizzazione, protocolli di segreteria',
+      storico: 'nuovi servizi e attrezzature: la resa nel tempo',
+      protocollo: 'lo studio trasferibile a un socio o a un nuovo direttore' } },
+    { key: 'professioni', factor: 1.05, label: 'Studi professionali e consulenza', noun: 'il tuo studio', ex: {
+      riunioni: 'call con i clienti e riunioni di studio',
+      decisioni: 'pareri, strategie e scelte sui clienti',
+      cruscotto: 'pratiche, ore e fatturato per cliente',
+      manuale: 'procedure di studio e modelli di lavoro',
+      storico: 'strategie proposte e risultati ottenuti',
+      protocollo: 'il metodo dello studio trasferibile a collaboratori e soci' } },
+    { key: 'servizi', factor: 1.0, label: 'Servizi alle imprese e digitale', noun: 'la tua azienda', ex: {
+      riunioni: 'call con clienti e team, anche da remoto',
+      decisioni: 'scelte su offerta, prezzi e priorità',
+      cruscotto: 'progetti, ore e marginalità per cliente',
+      manuale: 'processi di consegna e avvio dei nuovi clienti',
+      storico: 'progetti chiusi: stime contro realtà',
+      protocollo: 'il metodo dell’azienda trasferibile a nuovi responsabili' } },
+    { key: 'altro', factor: 1.0, label: 'Altro', noun: 'la tua azienda', ex: {
+      riunioni: 'riunioni e call di lavoro',
+      decisioni: 'le scelte importanti e il loro perché',
+      cruscotto: 'i numeri chiave della tua attività',
+      manuale: 'le procedure che oggi sono nella tua testa',
+      storico: 'le decisioni passate misurate sui risultati',
+      protocollo: 'la tua azienda trasferibile a un socio o a un erede' } }
   ],
 
   potential: { add: 45, floor: 85, cap: 90 }

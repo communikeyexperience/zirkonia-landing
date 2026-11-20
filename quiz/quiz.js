@@ -12,7 +12,8 @@
   function bookingUrl(res, nome, azienda) {
     var chi = nome ? 'sono ' + nome + (azienda ? ' di ' + azienda : '') + '. ' : '';
     var livello = /^Livello/.test(res.archetype.name) ? 'sono a ' + res.archetype.name : 'il mio livello è ' + res.archetype.name;
-    var testo = 'Buongiorno, ' + chi + 'Ho fatto lo ZirkonIA Score: ' + livello +
+    var pr = res.profile && res.profile.sectorLabel ? ' (' + res.profile.sectorLabel.toLowerCase() + (res.profile.sizeLabel ? ', ' + res.profile.sizeLabel.toLowerCase() : '') + ')' : '';
+    var testo = 'Buongiorno, ' + chi.replace(/\. $/, pr + '. ') + 'Ho fatto lo ZirkonIA Score: ' + livello +
       ', con ' + res.score + ' punti su 100 e un potenziale di ' + res.potential +
       '. Vorrei prenotare la consulenza gratuita one-to-one.';
     return WHATSAPP + '?text=' + encodeURIComponent(testo);
@@ -24,6 +25,30 @@
     var m = /[?&]src=([a-z0-9-]{1,40})/i.exec(location.search);
     return m ? m[1].toLowerCase() : 'sito';
   })();
+
+  /* Profilo: settore e dimensione, scelti nella schermata «Prima di iniziare» */
+  var profile = { sector: '', size: '' };
+  function renderProfile() {
+    chips('sectorChips', ZK_DATA.sectors, 'sector');
+    chips('sizeChips', ZK_DATA.sizes, 'size');
+    updateProfileBtn();
+  }
+  function chips(boxId, items, field) {
+    var box = document.getElementById(boxId); box.innerHTML = '';
+    items.forEach(function (it) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'qz-chip-opt'; b.textContent = it.label;
+      b.setAttribute('aria-pressed', profile[field] === it.key ? 'true' : 'false');
+      b.addEventListener('click', function () {
+        profile[field] = it.key;
+        var all = box.children; for (var i = 0; i < all.length; i++) all[i].setAttribute('aria-pressed', 'false');
+        b.setAttribute('aria-pressed', 'true');
+        updateProfileBtn();
+      });
+      box.appendChild(b);
+    });
+  }
+  function updateProfileBtn() { document.getElementById('profileNext').disabled = !(profile.sector && profile.size); }
 
   var sent = false; /* un solo invio per pagina; i doppi invii tra pagine li blocca lo script */
   var D = ZK_DATA;
@@ -112,14 +137,14 @@
 
   function back() {
     if (busy) return;
-    if (current === 0) { show('intro', 'intro-title'); return; }
+    if (current === 0) { show('profile', 'profile-title'); return; }
     transition(function () { current--; renderQuestion(); $('qText').focus({ preventScroll: true }); });
   }
 
   /* ---------- form con anteprima del punteggio ---------- */
   var RING = 2 * Math.PI * 52;
   function showForm() {
-    var res = ZK_SCORE.compute(answers);
+    var res = ZK_SCORE.compute(answers, profile);
     var locked = document.querySelectorAll('.qz-blur');
     locked[0].textContent = String(res.potential);
     locked[1].textContent = '€ ' + ZK_SCORE.euro(res.assetsTotal);
@@ -230,7 +255,7 @@
     errBox.hidden = true;
     for (var i = 0; i < N; i++) if (typeof answers[i] !== 'number') { current = i; renderQuestion(); show('question', 'qText'); return; }
 
-    var res = ZK_SCORE.compute(answers);
+    var res = ZK_SCORE.compute(answers, profile);
     var btn = $('submitBtn');
     btn.disabled = true;
 
@@ -246,6 +271,10 @@
         score: res.score,
         potential: res.potential,
         archetype: res.archetype.name,
+        settore: res.profile.sectorLabel,
+        dipendenti: res.profile.sizeLabel,
+        profile: { sector: profile.sector, size: profile.size },
+        assetsTotal: res.assetsTotal,
         source: SOURCE,
         ts: new Date().toISOString()
       });
@@ -274,15 +303,34 @@
       li.querySelector('i').style.width = it[2] + '%';
       box.appendChild(li);
     });
-    var last = document.createElement('li'); last.className = 'qz-hint-assets';
-    if (res.assets.length) {
-      last.innerHTML = '<div><small>Asset che costruiresti con ZirkonIA</small><b></b></div><span class="qz-hint-value"></span>';
-      last.querySelector('b').textContent = res.assets.length + ' asset · il dettaglio è nel report';
-      last.querySelector('.qz-hint-value').textContent = '\u20ac ' + ZK_SCORE.euro(res.assetsTotal);
-    } else {
+    if (!res.assets.length) {
+      var last = document.createElement('li'); last.className = 'qz-hint-assets qz-hint-none';
       last.innerHTML = '<div><small>Asset</small><b>Tutte le dimensioni sono sopra 60: nel report trovi da dove ripartire.</b></div>';
+      box.appendChild(last);
     }
-    box.appendChild(last);
+    renderAssets(res);
+  }
+
+  /* Asset che costruiresti: valore per la dimensione dell'azienda ed esempio del settore */
+  function renderAssets(res) {
+    var wrap = $('assetsBox');
+    if (!res.assets.length) { wrap.hidden = true; return; }
+    wrap.hidden = false;
+    var p = res.profile || {};
+    $('assetsFor').textContent = p.sectorLabel
+      ? 'Per ' + p.noun + (p.sizeLabel ? ' · ' + p.sizeLabel.toLowerCase().replace(/(\d)–(\d)/, '$1\u2011$2').replace(/ /g, '\u00a0') : '')
+      : 'Cosa costruiresti con ZirkonIA';
+    $('assetsTitle').textContent = res.assets.length === 1 ? '1 asset da costruire con ZirkonIA' : res.assets.length + ' asset da costruire con ZirkonIA';
+    $('assetsTotal').textContent = '\u20ac ' + ZK_SCORE.euro(res.assetsTotal);
+    var list = $('assetsList'); list.innerHTML = '';
+    res.assets.forEach(function (a) {
+      var li = document.createElement('li');
+      li.innerHTML = '<div><b></b><span></span></div><em></em>';
+      li.querySelector('b').textContent = a.name.replace(/ \(.*\)$/, '').replace(/:.*$/, '');
+      li.querySelector('span').textContent = a.example ? 'Per te: ' + a.example + '.' : '';
+      li.querySelector('em').textContent = '\u20ac ' + ZK_SCORE.euro(a.value);
+      list.appendChild(li);
+    });
   }
 
   function showResult(res, nome, email, azienda) {
@@ -295,13 +343,25 @@
     $('scorePot').textContent = '0';
     $('scoreText').textContent = 'Il tuo punteggio oggi è ' + res.score + ' su 100; con ZirkonIA può arrivare a ' + res.potential + '.';
     $('gapText').innerHTML = res.gap > 0
-      ? 'Insieme possiamo recuperare <strong>' + res.gap + ' punti</strong>.'
-      : 'Sei già al tuo massimo: parliamone da colleghi.';
+      ? 'Hai <strong>' + res.gap + ' punti</strong> da recuperare.'
+      : 'Sei già al tuo massimo.';
+    /* titolo della consulenza: parte dalla dimensione dove si recupera di più */
+    var gain = res.dimensions.reduce(function (a, b) { return b.recoverable > a.recoverable ? b : a; });
+    var ct = $('ctaTitle'); ct.textContent = '';
+    if (res.gap > 0 && gain.recoverable > 0) {
+      ct.appendChild(document.createTextNode('Recuperiamoli insieme, partendo '));
+      var hl = document.createElement('span'); hl.className = 'qz-hl'; hl.textContent = FROM_DIM[gain.key] || ('da ' + gain.name.toLowerCase());
+      ct.appendChild(hl); ct.appendChild(document.createTextNode('.'));
+    } else {
+      ct.textContent = 'Parliamone da colleghi.';
+    }
     renderHints(res);
     if (!lastPayload) lastPayload = { email: email };
     renderMail();
     $('mailTest').hidden = !!ENDPOINT;
     $('bookBtn').href = bookingUrl(res, nome, azienda);
+    $('bookBtn2').href = $('bookBtn').href;
+    watchSticky();
 
     var now = $('barNow'), gap = $('barGap'), mkNow = $('mkNow'), mkPot = $('mkPot');
     now.style.width = '0'; gap.style.left = '0'; gap.style.width = '0'; mkNow.style.left = '0'; mkPot.style.left = '0';
@@ -310,10 +370,31 @@
       now.style.width = res.score + '%';
       gap.style.left = res.score + '%';
       gap.style.width = res.gap + '%';
+      lastRes = res;
       separateMarkers(res);
+      var sc = document.querySelector('.qz-scale');
+      sc.style.setProperty('--pot', res.potential + '%');
+      sc.classList.add('is-ready');
       countUp($('scoreNow'), res.score);
       countUp($('scorePot'), res.potential);
     }, 60);
+  }
+
+  /* Pulsante fisso su telefono: visibile solo quando il riquadro della consulenza è fuori dallo schermo. */
+  /* formula breve, con l'articolo giusto, per il titolo della consulenza */
+  var FROM_DIM = { A: 'dalla memoria delle riunioni', B: 'dall’accesso ai dati', C: 'dai processi documentati', D: 'dalla qualità delle decisioni', E: 'dalla dipendenza dal titolare' };
+  var stickyIO = null;
+  function watchSticky() {
+    var bar = $('stickyBook'), box = $('consultMain');
+    if (!bar || !box || !('IntersectionObserver' in window)) return;
+    if (stickyIO) stickyIO.disconnect();
+    stickyIO = new IntersectionObserver(function (es) {
+      var on = !es[0].isIntersecting;
+      bar.classList.toggle('is-on', on);
+      bar.setAttribute('aria-hidden', on ? 'false' : 'true');
+      $('bookBtn2').tabIndex = on ? 0 : -1;
+    }, { threshold: 0.15 });
+    stickyIO.observe(box);
   }
 
   /* Se i due numeri sono vicini, li allontana quanto basta perché non si sovrappongano. */
@@ -327,9 +408,12 @@
       b = Math.min(W - hb, a + ha + hb + pad);
       a = Math.max(ha, b - ha - hb - pad);
     }
-    mkNow.style.left = a + 'px';
-    mkPot.style.left = b + 'px';
+    /* in percentuale: i numeri restano agganciati alla barra anche se la finestra cambia larghezza */
+    mkNow.style.left = (a / W * 100) + '%';
+    mkPot.style.left = (b / W * 100) + '%';
   }
+  window.addEventListener('resize', function () { if (lastRes) separateMarkers(lastRes); });
+  var lastRes = null;
 
   function countUp(el, to) {
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -354,7 +438,12 @@
   dlg.addEventListener('click', function (e) { if (e.target === dlg && dlg.close) dlg.close(); });
 
   /* ---------- avvio ---------- */
-  $('startBtn').addEventListener('click', function () { current = 0; renderQuestion(); show('question', 'qText'); });
+  $('startBtn').addEventListener('click', function () { renderProfile(); show('profile', 'profile-title'); });
+  $('profileBack').addEventListener('click', function () { show('intro', 'intro-title'); });
+  $('profileNext').addEventListener('click', function () {
+    if (!profile.sector || !profile.size) return;
+    current = 0; renderQuestion(); show('question', 'qText');
+  });
   $('backBtn').addEventListener('click', back);
   $('formBackBtn').addEventListener('click', function () { current = N - 1; renderQuestion(); show('question', 'qText'); });
   $('leadForm').addEventListener('submit', onSubmit);
