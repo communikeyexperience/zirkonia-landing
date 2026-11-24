@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Assistente ZirkonIA (test) | ZirkonIA</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/fonts.css">
+<style>
+  :root{
+    --bg:#070a12; --ink:#eef2fa; --ink-dim:#8b93a8; --ink-faint:#5c637a;
+    --glow:#4d7fff; --glow-2:#7fb0ff; --line:rgba(140,155,185,0.14);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.55}
+  main{max-width:760px;margin:0 auto;padding:56px 20px 120px}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px}
+  .top a{color:var(--ink-dim);text-decoration:none;font-size:14px}
+  .top a:hover{color:var(--ink)}
+  .tag{display:inline-block;font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow-2);border:1px solid var(--line);border-radius:999px;padding:4px 12px}
+  h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(32px,6vw,48px);line-height:1.1;margin:18px 0 16px}
+  p.lead{color:var(--ink-dim);font-size:18px;margin:0 0 32px}
+  .card{border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,0.02);padding:24px}
+  .card h2{font-family:'Space Grotesk',sans-serif;font-size:18px;margin:0 0 8px}
+  .card p{color:var(--ink-dim);margin:0 0 20px;font-size:15px}
+  .btn{appearance:none;border:0;cursor:pointer;font:600 16px/1 'Inter',sans-serif;color:#fff;background:linear-gradient(135deg,var(--glow),#2457c5);border-radius:999px;padding:14px 24px;box-shadow:0 8px 30px rgba(77,127,255,.35)}
+  .btn:hover{filter:brightness(1.08)}
+  .btn:focus-visible{outline:2px solid var(--glow-2);outline-offset:3px}
+  .note{font-size:13px;color:var(--ink-faint);margin-top:14px}
+  .note a{color:var(--ink-dim)}
+  #chat-box{margin-top:20px}
+  #chat-box iframe{display:block;border:0;width:100%;height:680px;max-width:440px;border-radius:20px;background:#fff}
+  ul.try{color:var(--ink-dim);font-size:15px;padding-left:20px;margin:28px 0 0}
+  ul.try li{margin:4px 0}
+</style>
+</head>
+<body>
+<main>
+  <div class="top">
+    <a href="/">← zirkonia.ai</a>
+    <span class="tag">Pagina di test</span>
+  </div>
+
+  <h1>Parli con l'assistente digitale di ZirkonIA</h1>
+  <p class="lead">Risponde alle domande sul secondo cervello e può fissarle una call conoscitiva di 30 minuti con il team.</p>
+
+  <section class="card" aria-labelledby="chat-title">
+    <h2 id="chat-title">Chat con l'assistente</h2>
+    <p>È un assistente basato sull'intelligenza artificiale: può sbagliare, e per prezzi e preventivi la mette in contatto con una persona del team.</p>
+    <button class="btn" id="start-chat" type="button">Avvia la chat</button>
+    <p class="note">La chat si carica solo quando premi il pulsante: da quel momento il tuo browser si collega al fornitore del servizio (Famulor, server in UE), che tratta per nostro conto i messaggi che scrivi. Non scrivere dati sanitari o informazioni riservate.</p>
+    <div id="chat-box"></div>
+  </section>
+
+  <ul class="try" aria-label="Domande di esempio">
+    <li>«Che cosa fate di preciso?»</li>
+    <li>«Quanto costa per un'azienda di 10 persone?»</li>
+    <li>«Vorrei fissare una call giovedì pomeriggio.»</li>
+  </ul>
+</main>
+<script>
+  (function(){
+    var btn = document.getElementById('start-chat');
+    var box = document.getElementById('chat-box');
+    btn.addEventListener('click', function(){
+      if (box.querySelector('iframe')) return;
+      var f = document.createElement('iframe');
+      f.src = 'https://app.famulor.io/widget/wgt_4c80f8b53453454f8a159e09';
+      f.title = 'Assistente digitale ZirkonIA';
+      f.setAttribute('allow', 'microphone; display-capture; autoplay; clipboard-write');
+      f.setAttribute('allowusermedia', '');
+      box.appendChild(f);
+      btn.textContent = 'Chat avviata';
+      btn.disabled = true;
+      f.focus();
+    });
+  })();
+</script>
+</body>
+</html>
